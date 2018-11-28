@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,10 @@ import fr.adaming.service.ILigneCommandeService;
 @RequestScoped
 public class CommandeManagedBean implements Serializable {
 
+	@ManagedProperty(value="#{coService}")
+	private ICommandeService coSer;
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	
