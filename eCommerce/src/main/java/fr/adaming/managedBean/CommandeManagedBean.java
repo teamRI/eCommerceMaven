@@ -1,6 +1,5 @@
 package fr.adaming.managedBean;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -24,16 +23,16 @@ import fr.adaming.service.ILigneCommandeService;
 @RequestScoped
 public class CommandeManagedBean implements Serializable {
 
-	@ManagedProperty(value="#{coService}")
+	@ManagedProperty(value = "#{coService}")
 	private ICommandeService coSer;
-	
-	
+	@ManagedProperty(value = "#{lcoService}")
+	private ILigneCommandeService lcoSer;
+
 	private static final long serialVersionUID = 1L;
 
-	
-	Mail envoyermail= new Mail();
-	
-	CreatePdf createpdf= new CreatePdf();
+	Mail envoyermail = new Mail();
+
+	CreatePdf createpdf = new CreatePdf();
 
 	private Commande co;
 	private Client cl;
@@ -84,6 +83,14 @@ public class CommandeManagedBean implements Serializable {
 
 	public void setI(boolean i) {
 		this.i = i;
+	}
+
+	public void setCoSer(ICommandeService coSer) {
+		this.coSer = coSer;
+	}
+
+	public void setLcoSer(ILigneCommandeService lcoSer) {
+		this.lcoSer = lcoSer;
 	}
 
 	public String addCommande() {
@@ -151,8 +158,8 @@ public class CommandeManagedBean implements Serializable {
 	}
 
 	public String validerCommande() {
-		this.cl=(Client) maSession.getAttribute("client");
-		this.co= cl.getCo();
+		this.cl = (Client) maSession.getAttribute("client");
+		this.co = cl.getCo();
 		List<LigneCommande> listlco = (List<LigneCommande>) maSession.getAttribute("listlco");
 		for (LigneCommande lco : listlco) {
 
@@ -161,8 +168,7 @@ public class CommandeManagedBean implements Serializable {
 		int verif = coSer.deleteCommande(this.co);
 
 		if (verif != 0) {
-	
-envoyermail.sendMail(co.getCl(), co, listlco);
+			envoyermail.sendMail(co.getCl(), co, listlco);
 			i = true;
 			return "acceuil";
 		} else {
