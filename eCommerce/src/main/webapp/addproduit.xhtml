@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Page d'Acceuil</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+
+<h1 style="color: blue; text-align: center;">Formulaire d'addition</h1>
+	<h:form enctype="multipart/form-data">
+		<h:panelGrid columns="2">
+		
+		    <h:outputLabel>Categorie</h:outputLabel>
+			<p:inputText value="#{prMB.categorie.id}" />
+			
+		
+			<h:outputLabel>designation</h:outputLabel>
+			<p:inputText value="#{prMB.produit.designation}" />
+			
+			<h:outputLabel>description</h:outputLabel>
+			<p:inputText value="#{prMB.produit.description}" />
+			
+			<h:outputLabel value="Photo" for="image"/>
+			<br/>
+			<p:fileUpload id="image" value="#{prMB.file}" mode="simple" skinSimple="true"/>
+			<p:message for="image" display="icon"/>
+			
+			<h:outputLabel>prix</h:outputLabel>
+			<p:inputText value="#{prMB.produit.prix}" />
+			
+			<h:outputLabel>quantité</h:outputLabel>
+			<p:inputText value="#{prMB.produit.quantite}" />
+		
+		
+			<p:commandButton value="Modifier" action="#{prMB.addProduit}" ajax="false"/>
+		</h:panelGrid>
+	</h:form>
+	<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
+<h:form>
+<p:dataTable var="pr" value="#{sessionScope.listProd}" rendered="#{prMB.i}">
+ <p:column headerText="ID">
+        <h:outputText value="#{pr.id}" />
+    </p:column>
+    
+     <p:column headerText="designation">
+        <h:outputText value="#{pr.designation}" />
+    </p:column>
+    
+    <p:column headerText="Image">
+    <h:graphicImage value="#{pr.image}" style="width:100px;height:100px"/>
+    </p:column>
+    
+     <p:column headerText="description">
+        <h:outputText value="#{pr.description}" />
+    </p:column>
+
+   <p:column headerText="prix">
+        <h:outputText value="#{pr.prix}" />
+    </p:column>
+
+ <p:column headerText="quantité">
+        <h:outputText value="#{pr.quantite}" />
+    </p:column>
+
+
+</p:dataTable>
+</h:form>
+
+</h:body>
+</html>
