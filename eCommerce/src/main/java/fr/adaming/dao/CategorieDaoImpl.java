@@ -2,45 +2,75 @@ package fr.adaming.dao;
 
 import java.util.List;
 
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Categorie;
 
-
+@Repository
 public class CategorieDaoImpl implements ICategorieDao{
 
+	 @Autowired
+		private SessionFactory sf;
+	    
+	 //*********************************SETTER POUR INJECTION DE DEPENDENCE***********************************************
+
+		public void setSf(SessionFactory sf) {
+			this.sf = sf;
+		}
+	//*********************************************************************************************************************
+
+	
+	
 	@Override
 	public List<Categorie> getAllCategorie() {
-		// TODO Auto-generated method stub
-		return null;
+		Session s= sf.getCurrentSession();
+		String req="SELECT c FROM Categorie c";
+		Query query= s.createQuery(req);
+		
+		
+		return query.list();
 	}
 
 	@Override
 	public Categorie addCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s= sf.getCurrentSession();
+		s.persist(c);
+		return c;
 	}
 
 	@Override
 	public Categorie getCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s= sf.getCurrentSession();
+		Categorie cOut= (Categorie) s.get(Categorie.class, c.getId());
+		
+		
+		return cOut;
 	}
 
 	@Override
 	public Categorie upDateCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s= sf.getCurrentSession();
+		
+		String req="UPDATE Categorie c SET c.nomCat=:pNomCat, c.photo=:pPhoto, c.description=:pDescription WHERE c.id=:pId";
+		Query query= s.createQuery(req);
+		query.setParameter("pNomCat", c.getNomCat());
+		query.setParameter("pPhoto", c.getPhoto());
+		query.setParameter("pDescription", c.getDescription());
+		query.setParameter("pId", c.getId());
+		
+		return (Categorie) s.merge(c);
 	}
 
 	@Override
 	public int delateCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return 0;
+		Session s= sf.getCurrentSession();
+		Categorie cOut= (Categorie) s.get(Categorie.class, c.getId());
+		s.delete(cOut);
+		return 1;
 	}
 
 }
