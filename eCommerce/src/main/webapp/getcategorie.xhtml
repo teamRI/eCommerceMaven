@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Page de recherche</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+
+<h1 style="color: blue; text-align: center;">Formulaire de recherche</h1>
+	<h:form enctype="multipart/form-data">
+		<h:panelGrid columns="2">
+		
+		    <h:outputLabel>Categorie</h:outputLabel>
+			<p:inputText value="#{catMB.categorie.id}" />
+		
+			
+		
+			<p:commandButton value="rechercher" action="#{catMB.getCategories}" ajax="false"/>
+		</h:panelGrid>
+	</h:form>
+	<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
+
+<h:form>
+<p:dataTable var="cat" value="#{catMB.categorie}" rendered="#{catMB.i}">
+ <p:column headerText="ID">
+        <h:outputText value="#{cat.id}" />
+    </p:column>
+    
+     <p:column headerText="nom">
+        <h:outputText value="#{cat.nomCat}" />
+    </p:column>
+    
+    <p:column headerText="Image">
+    <h:graphicImage value="#{cat.image}" style="width:100px;height:100px"/>
+    </p:column>
+    
+     <p:column headerText="description">
+        <h:outputText value="#{cat.description}" />
+    </p:column>
+
+
+
+</p:dataTable>
+</h:form>
+
+
+</h:body>
+</html>

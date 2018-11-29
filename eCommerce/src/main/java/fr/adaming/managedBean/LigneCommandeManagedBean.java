@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IClientService;
 import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IProduitService;
@@ -26,8 +29,15 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@ManagedProperty(value = "#{coService}")
+	private ICommandeService coSer;
+	@ManagedProperty(value = "#{caService}")
+	private ICategorieService caSer;
+	@ManagedProperty(value = "#{prService}")
+	private IProduitService prSer;
+	@ManagedProperty(value = "#{lcoService}")
+	private ILigneCommandeService lcoSer;
 
-	
 	private LigneCommande lco;
 	private List<LigneCommande> listelco;
 	private Commande co;
@@ -111,7 +121,7 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.cl = (Client) maSession.getAttribute("client");
 		this.co.setCl(this.cl);
 		if (cl.getCo() != null) {
-			this.pr=prSer.getProduit(pr);
+			this.pr = prSer.getProduit(pr);
 			this.lco.setCo(this.co);
 			this.lco.setPr(pr);
 			this.lco.setQuantiteCo(1);
@@ -131,7 +141,7 @@ public class LigneCommandeManagedBean implements Serializable {
 			this.co = coSer.addCommande(co);
 			System.out.println("**************************************");
 			System.out.println(co.getId());
-			this.pr=prSer.getProduit(pr);
+			this.pr = prSer.getProduit(pr);
 			this.lco.setCo(this.co);
 			this.lco.setPr(pr);
 			this.lco.setQuantiteCo(1);

@@ -6,13 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
-import fr.adaming.model.Commande;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
@@ -24,7 +24,12 @@ public class AcceuilManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-
+	@ManagedProperty(value = "#{clService}")
+	private IClientService clSer;
+	@ManagedProperty(value="#{caService}")
+	private ICategorieService caSer;
+	@ManagedProperty(value="#{prService}")
+	private IProduitService prSer;
 
 	private Client cl;
 	private boolean i;

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -16,14 +17,21 @@ import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.IFormateurService;
 
 @ManagedBean(name = "clMB")
 @RequestScoped
 public class ClientManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@ManagedProperty(value = "#{clService}")
+	private IClientService clSer;
+	@ManagedProperty(value="#{caService}")
+	private ICategorieService caSer;
 	
+	public void setClSer(IClientService clSer) {
+		this.clSer = clSer;
+	}
 
 	private Client cl;
 	private List<LigneCommande> pannier;
@@ -102,7 +110,6 @@ public class ClientManagedBean implements Serializable {
 		if (clOut != null) {
 			i = true;
 			this.cl = clOut;
-			System.out.println(cl);
 			return "getclient";
 		} else {
 			i = false;
