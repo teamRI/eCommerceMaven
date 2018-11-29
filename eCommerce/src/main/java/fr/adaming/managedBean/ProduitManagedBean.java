@@ -186,7 +186,11 @@ public class ProduitManagedBean implements Serializable{
 		}
 	
 		public String upDateProduit() {
-			this.produit.setPhoto(file.getContents());
+			if(file!=null) {
+			this.produit.setPhoto(file.getContents());}else {
+				this.categorie.setPhoto(prService.getProduit(produit).getPhoto());;
+			}
+			
 			Produit pOut= prService.upDateProduit(this.produit);
 			if(pOut!=null) {
 				List<Produit> list= prService.getAllProduit(categorie);

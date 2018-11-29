@@ -36,7 +36,7 @@ public class Categorie {
 	
 	 //1.1******************Relations*****************************
 	  
-	@OneToMany(mappedBy="categorie",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="categorie")
 	  private List<Produit> listeProduit;
 	  
 	

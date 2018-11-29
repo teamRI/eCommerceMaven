@@ -226,7 +226,11 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 	}
 	
 	public String upDateCategorie() {
-		this.categorie.setPhoto(file.getContents());
+		if(file!=null) {
+			this.categorie.setPhoto(file.getContents());
+			
+		}else {
+		this.categorie.setPhoto(caService.getCategorie(categorie).getPhoto());}
 		Categorie cOut= caService.upDateCategorie(this.categorie);
 		if(cOut!=null) {
 			List<Categorie> list= caService.getAllCategorie();

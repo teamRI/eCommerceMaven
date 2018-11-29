@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,13 +32,18 @@ public class ProduitDaoImpl implements IProduitDao{
 		
 		Query query= s.createQuery(req);
 		query.setParameter("pCategorie", c.getId());
-		return query.list();
+		
+		List<Produit> listOut= query.list();
+		for(Produit pr: listOut) {
+			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
+		}
+		return listOut;
 	}
 
 	@Override
 	public Produit addProduit(Produit pr) {
 		Session s= sf.getCurrentSession();
-		s.persist(pr);
+		s.save(pr);
 		return pr;
 	}
 
@@ -45,7 +51,7 @@ public class ProduitDaoImpl implements IProduitDao{
 	public Produit getProduit(Produit pr) {
 		Session s= sf.getCurrentSession();
 	Produit pOut=	(Produit) s.get(Produit.class, pr.getId());
-	
+	pOut.setImage("data:image/png);base64," + Base64.encodeBase64String(pOut.getPhoto()));
 		return pOut;
 	}
 
