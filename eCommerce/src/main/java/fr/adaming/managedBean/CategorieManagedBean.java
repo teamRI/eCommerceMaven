@@ -29,19 +29,25 @@ public class CategorieManagedBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	//1***********************UML EN JAVA***********************************************************************************
-	@ManagedProperty(value="#{catService}")
-	private ICategorieService catService;
+	@ManagedProperty(value="#{caService}")
+	private ICategorieService caService;
 	
-	public void setCatService(ICategorieService catService) {
-		this.catService = catService;
+	public void setCaService(ICategorieService caService) {
+		this.caService = caService;
 	}
 
 	@ManagedProperty(value="#{prService}")
 	private IProduitService prService;
 	
+	
+	
 	//2************************ATTRIBUTS***********************************************************************************
 	
 	
+	public void setPrService(IProduitService prService) {
+		this.prService = prService;
+	}
+
 	private Categorie categorie;
 	
 	private List<Categorie> listCategorie;
@@ -70,7 +76,7 @@ public class CategorieManagedBean implements Serializable{
 		this.adminSession= (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		adminSession.getAttribute("verifSession");
 		this.categorie= new Categorie();
-		this.listCategorie= catService.getAllCategorie();
+		this.listCategorie= caService.getAllCategorie();
 			this.file= new UploadedFile() {
 				
 				@Override
@@ -185,11 +191,11 @@ public class CategorieManagedBean implements Serializable{
 
 	public String addCategorie() {
 	   this.categorie.setPhoto(file.getContents());
-		Categorie c= catService.addCategorie(categorie);
+		Categorie c= caService.addCategorie(categorie);
 		
 		if(c.getId()!=0) {
 			i=true;
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe", catService.getAllCategorie());
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe", caService.getAllCategorie());
 		
 		return "acceuil";
 		
@@ -202,7 +208,7 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 	}
 
 	public String getCategories() {
-		this.categorie= catService.getCategorie(categorie);
+		this.categorie= caService.getCategorie(categorie);
 		
 		if(this.categorie!=null) {
 			i=true;
@@ -221,9 +227,9 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 	
 	public String upDateCategorie() {
 		this.categorie.setPhoto(file.getContents());
-		Categorie cOut= catService.upDateCategorie(this.categorie);
+		Categorie cOut= caService.upDateCategorie(this.categorie);
 		if(cOut!=null) {
-			List<Categorie> list= catService.getAllCategorie();
+			List<Categorie> list= caService.getAllCategorie();
 			i=true;
 			this.listCategorie=list;
 			return "acceuil";
@@ -236,9 +242,9 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 	}
 	
 	public String deleteCategorie() {
-		catService.delateCategorie(this.categorie);
+		caService.delateCategorie(this.categorie);
 		if(this.categorie!=null) {
-			List<Categorie> list= catService.getAllCategorie();
+			List<Categorie> list= caService.getAllCategorie();
 			this.listCategorie= list;
 			
 			return "acceuil";

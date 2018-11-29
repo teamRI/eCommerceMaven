@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.adaming.dao.ICategorieDao;
 import fr.adaming.model.Categorie;
 
-@Service("catService")
+@Service("caService")
 @Transactional
 public class CategorieServiceImpl implements ICategorieService{
 

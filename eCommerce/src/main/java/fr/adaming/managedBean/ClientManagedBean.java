@@ -33,6 +33,10 @@ public class ClientManagedBean implements Serializable {
 		this.clSer = clSer;
 	}
 
+	public void setCaSer(ICategorieService caSer) {
+		this.caSer = caSer;
+	}
+
 	private Client cl;
 	private List<LigneCommande> pannier;
 	private Commande co;

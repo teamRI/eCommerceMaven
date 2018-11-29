@@ -31,7 +31,7 @@ public class Commande {
 	@JoinColumn(name = "cl_id", referencedColumnName = "id_cl")
 	private Client cl;
 	
-	@OneToMany(mappedBy="co",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="co",cascade=CascadeType.ALL)
 	private List<LigneCommande> listelco;
 	// 2*************CONSTRUCTEURS***************************************************************
 
