@@ -2,46 +2,63 @@ package fr.adaming.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
-
+@Service("prService")
+@Transactional
 public class ProduitServiceImpl implements IProduitService{
+
+	@Autowired
+	private IProduitDao prDao;
+	
+	
+	public void setPrDao(IProduitDao prDao) {
+		this.prDao = prDao;
+		
+	}
+	
+	
+	
 
 	@Override
 	public List<Produit> getAllProduit(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return prDao.getAllProduit(c);
 	}
 
 	@Override
 	public Produit addProduit(Produit pr, Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		pr.setCategorie(c);
+		return prDao.addProduit(pr);
 	}
 
 	@Override
 	public Produit getProduit(Produit pr) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return prDao.getProduit(pr);
 	}
 
 	@Override
 	public Produit upDateProduit(Produit pr, Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		pr.setCategorie(c);
+		return prDao.upDateProduit(pr);
 	}
 
 	@Override
 	public int delateProduit(Produit pr) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return prDao.delateProduit(pr);
 	}
 
 	@Override
 	public Produit getProduitByNom(Produit pr) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

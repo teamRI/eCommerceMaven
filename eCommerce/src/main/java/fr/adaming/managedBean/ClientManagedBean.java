@@ -17,7 +17,7 @@ import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
-import fr.adaming.service.IFormateurService;
+
 
 @ManagedBean(name = "clMB")
 @RequestScoped

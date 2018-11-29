@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
-import fr.adaming.model.Formateur;
+
 
 @Repository
 public class ClientDaoImpl implements IClientDao {

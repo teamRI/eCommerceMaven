@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -27,11 +28,18 @@ public class ProduitManagedBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	//1***********************UML EN JAVA***********************************************************************************
+	@ManagedProperty(value="#{prService}")
+	private IProduitService prService;
 	
+	public void setPrService(IProduitService prService) {
+		this.prService = prService;
+	}
 
 	
 	//2************************ATTRIBUTS***********************************************************************************
 	
+	
+
 	private Categorie categorie;
 	
 	private Produit produit;
@@ -147,7 +155,7 @@ public class ProduitManagedBean implements Serializable{
 		
 		public String addProduit() {
 			this.produit.setPhoto(file.getContents());
-			this.produit.setpCategorie(this.categorie);
+			this.produit.setCategorie(this.categorie);
 			this.produit= prService.addProduit(this.produit, this.categorie);
 			if(this.produit.getId()!=0) {
 				i=true;
@@ -179,7 +187,7 @@ public class ProduitManagedBean implements Serializable{
 	
 		public String upDateProduit() {
 			this.produit.setPhoto(file.getContents());
-			this.produit.setpCategorie(this.categorie);
+			this.produit.setCategorie(this.categorie);
 			Produit pOut= prService.upDateProduit(this.produit, this.categorie);
 			if(pOut!=null) {
 				List<Produit> list= prService.getAllProduit(categorie);
@@ -196,7 +204,7 @@ public class ProduitManagedBean implements Serializable{
 		
 		public String delateProduit() {
 			this.produit.setPhoto(file.getContents());
-			this.produit.setpCategorie(this.categorie);
+			this.produit.setCategorie(this.categorie);
 		prService.delateProduit(this.produit);
 		if(this.produit!=null) {
 			List<Produit> list= prService.getAllProduit(categorie);

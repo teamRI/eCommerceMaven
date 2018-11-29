@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Page d'Acceuil</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+
+	<h:form>
+		<p:outputLabel>id</p:outputLabel>
+		<p:inputText value="#{clMB.cl.id}"></p:inputText>
+		<p:commandButton value="supprimer" action="#{clMB.deleteClient}" />
+	</h:form>
+	<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
+</h:body>
+</html>

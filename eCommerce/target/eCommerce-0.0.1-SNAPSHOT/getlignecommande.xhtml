@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Page de recherche de commande</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+	<h1 style="color: blue; text-align: center;">Formulaire de recherche</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Id</h:outputLabel>
+			<p:inputText value="#{lcoMB.lco.id}" />
+			<p:commandButton value="Rechercher" action="#{lcoMB.getLigneCommande}" />
+		</h:panelGrid>
+	</h:form>
+	<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
+	<h:form>
+		<h1 style="text-align: center">Ligne de Commande trouvé</h1>
+		<p:dataTable var="lco" value="#{lcoMB.lco}">
+			<p:column headerText="Id">
+				<h:outputText value="#{lco.id}" />
+			</p:column>
+
+			<p:column headerText="Id Commande" priority="2">
+				<h:outputText value="#{lco.co.id}" />
+			</p:column>
+			
+			<p:column headerText="Produit" priority="2">
+				<h:outputText value="#{lco.pr.designation}" />
+			</p:column>
+			
+			<p:column headerText="Quantité" priority="2">
+				<h:outputText value="#{lco.quantiteCo}" />
+			</p:column>
+			
+			<p:column headerText="prix" priority="2">
+				<h:outputText value="#{lco.prixfinal}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Page d'Acceuil</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+
+	<h:form>
+		<p:outputLabel>id</p:outputLabel>
+		<p:inputText value="#{clMB.cl.id}"></p:inputText>
+		<p:commandButton value="chercher" action="#{clMB.getClient}" />
+	</h:form>
+	<h:form>
+		<h1 style="text-align: center">Client trouver</h1>
+		<p:dataTable var="cl" value="#{clMB.cl}">
+			<p:column headerText="Id">
+				<h:outputText value="#{cl.id}" />
+			</p:column>
+
+			<p:column headerText="Nom" priority="2">
+				<h:outputText value="#{cl.nom}" />
+			</p:column>
+
+			<p:column headerText="Adresse" priority="3">
+				<h:outputText value="#{cl.adresse}" />
+			</p:column>
+
+			<p:column headerText="e-mail" priority="4">
+				<h:outputText value="#{cl.email}" />
+			</p:column>
+
+			<p:column headerText="telephone" priority="4">
+				<h:outputText value="#{cl.tel}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

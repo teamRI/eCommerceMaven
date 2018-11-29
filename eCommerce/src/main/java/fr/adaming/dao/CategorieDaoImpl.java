@@ -70,7 +70,7 @@ public class CategorieDaoImpl implements ICategorieDao{
 		Session s= sf.getCurrentSession();
 		Categorie cOut= (Categorie) s.get(Categorie.class, c.getId());
 		s.delete(cOut);
-		return 1;
+		return 0;
 	}
 
 }

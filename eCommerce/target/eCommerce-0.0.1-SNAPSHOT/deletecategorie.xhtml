@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Page d'Acceuil</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+
+<h1 style="color: blue; text-align: center;">Formulaire de suppression</h1>
+	<h:form enctype="multipart/form-data">
+		<h:panelGrid columns="2">
+		
+		    <h:outputLabel>Categorie</h:outputLabel>
+			<p:inputText value="#{catMB.categorie.id}" />
+		
+			
+		
+			<p:commandButton value="supprimer" action="#{catMB.deleteCategorie}" ajax="false"/>
+		</h:panelGrid>
+	</h:form>
+	<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
+
+
+</h:body>
+</html>

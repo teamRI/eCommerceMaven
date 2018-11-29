@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IClientDao;
-import fr.adaming.dao.IEtudiantDao;
+
 import fr.adaming.model.Client;
 
 @Service("clService")

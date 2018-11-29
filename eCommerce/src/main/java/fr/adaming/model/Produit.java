@@ -39,10 +39,10 @@ public class Produit {
 	
 	   @ManyToOne
 	   @JoinColumn(name="cat_id",referencedColumnName="id_cat")
-       private Categorie pCategorie;
+       private Categorie categorie;
 	   
 	   @OneToOne(mappedBy="pr")
-	   private LigneCommande pLigneCommande;
+	   private LigneCommande ligneCommande;
 	
 	//2*************CONSTRUCTEURS***************************************************************
 	
@@ -147,22 +147,26 @@ public class Produit {
 		this.image = image;
 	}
 
-	public LigneCommande getpLigneCommande() {
-		return pLigneCommande;
-	}
 
-	public void setpLigneCommande(LigneCommande pLigneCommande) {
-		this.pLigneCommande = pLigneCommande;
-	}
-
-	public Categorie getpCategorie() {
-		return pCategorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
 
-	public void setpCategorie(Categorie pCategorie) {
-		this.pCategorie = pCategorie;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
+
+
+	public LigneCommande getLigneCommande() {
+		return ligneCommande;
+	}
+
+
+	public void setLigneCommande(LigneCommande ligneCommande) {
+		this.ligneCommande = ligneCommande;
+	}
+
 	
 	
 	
