@@ -14,7 +14,9 @@
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-
+	<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
 	<h:form id="formTest">
 
 		<p:dataTable id="test" var="lco" value="#{sessionScope.listlco}">
@@ -55,7 +57,11 @@
 				</h:commandLink>
 			</p:column>
 		</p:dataTable>
-		<p:outputLabel value="#{lcoMB.prixTotal}" />
+		<p:dataTable var="px" value="#{lcoMB.prixTotal}" style="width:20%">
+			<p:column headerText="Prix total">
+				<h:outputText value="#{px}" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
 
 

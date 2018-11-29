@@ -132,18 +132,14 @@ public class LigneCommandeManagedBean implements Serializable {
 	public void setLcoSer(ILigneCommandeService lcoSer) {
 		this.lcoSer = lcoSer;
 	}
-	
-	public String test() {
-		System.out.println("je suis dans la methode d'edwin");
-		return "ok";
-	}
 
 	public String addLigneCommande() {
 		System.out.println("je suis dans la methode");
-		System.out.println(this.cl.getId());
 		this.cl = (Client) maSession.getAttribute("client");
-		this.co.setCl(this.cl);
-		if (cl.getCo() != null) {
+		System.out.println(this.cl.getId());
+		this.co=coSer.getAllCommandeByCl(this.cl);
+		System.out.println(this.co);
+		if (this.co != null) {
 			this.pr = prSer.getProduit(pr);
 			this.lco.setCo(this.co);
 			this.lco.setPr(pr);
@@ -157,6 +153,8 @@ public class LigneCommandeManagedBean implements Serializable {
 				return "acceuil";
 			}
 		} else {
+			this.co=new Commande();
+			this.co.setCl(this.cl);
 			Date dateAct = new Date();
 			this.co.setDateCommande(dateAct);
 			System.out.println("**************************************");
@@ -170,6 +168,8 @@ public class LigneCommandeManagedBean implements Serializable {
 			this.lco.setQuantiteCo(1);
 			this.lco = lcoSer.addLigneCommande(this.lco);
 			if (lco != null) {
+				this.cl.setCo(this.co);
+				maSession.setAttribute("client", this.cl);
 				i = true;
 				return "catetpr";
 			} else {
@@ -192,8 +192,39 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	public String upDatePlusLigneCommande() {
 		this.cl = (Client) maSession.getAttribute("client");
-		int q = lcoSer.getLigneCommande(this.lco).getQuantiteCo();
-		this.lco.setQuantiteCo(q + 1);
+		this.lco=lcoSer.getLigneCommande(this.lco);
+		int q = this.lco.getQuantiteCo();
+		this.pr=prSer.getProduit(lco.getPr());
+		int qpr=this.pr.getQuantite();
+		if(q+1<=qpr) {
+			this.lco.setQuantiteCo(q + 1);
+			this.lco = lcoSer.upDateLigneCommande(this.lco);
+			System.out.println(q);
+			if (this.lco != null) {
+				this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
+				maSession.setAttribute("listlco", this.listelco);
+				for (LigneCommande lco : this.listelco) {
+					this.prixTotal = this.prixTotal + lco.getPrixfinal();
+				}
+				i = true;
+				return "pannier";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+				return "pannier";
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("le stock n'est pas suffisant!"));
+			return "pannier";
+		}
+	}
+
+	public String upDateMoinsLigneCommande() {
+		this.cl = (Client) maSession.getAttribute("client");
+		this.lco=lcoSer.getLigneCommande(this.lco);
+		int q = this.lco.getQuantiteCo();
+		this.pr=prSer.getProduit(lco.getPr());
+		if(q-1>=0) {
+		this.lco.setQuantiteCo(q - 1);
 		this.lco = lcoSer.upDateLigneCommande(this.lco);
 		System.out.println(q);
 		if (this.lco != null) {
@@ -208,24 +239,8 @@ public class LigneCommandeManagedBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
 			return "pannier";
 		}
-	}
-
-	public String upDateMoinsLigneCommande() {
-		this.cl = (Client) maSession.getAttribute("client");
-		int q = lcoSer.getLigneCommande(this.lco).getQuantiteCo();
-		this.lco.setQuantiteCo(q - 1);
-		this.lco = lcoSer.upDateLigneCommande(this.lco);
-		System.out.println(q);
-		if (this.lco != null) {
-			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
-			maSession.setAttribute("listlco", this.listelco);
-			for (LigneCommande lco : this.listelco) {
-				this.prixTotal = this.prixTotal + lco.getPrixfinal();
-			}
-			i = true;
-			return "pannier";
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la quantité ne peut pas être inferieur à 0!"));
 			return "pannier";
 		}
 	}
@@ -244,7 +259,7 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	public String getAllLigneComandeByCo() {
 		this.cl = (Client) maSession.getAttribute("client");
-		if(this.cl!=null) {
+		if (this.cl != null) {
 			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
 			maSession.setAttribute("listlco", this.listelco);
 			for (LigneCommande lco : this.listelco) {
@@ -255,7 +270,7 @@ public class LigneCommandeManagedBean implements Serializable {
 		} else {
 			return "loginCl";
 		}
-		
+
 	}
 
 }
