@@ -45,8 +45,8 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public Produit upDateProduit(Produit pr, Categorie c) {
-		pr.setCategorie(c);
+	public Produit upDateProduit(Produit pr) {
+	
 		return prDao.upDateProduit(pr);
 	}
 

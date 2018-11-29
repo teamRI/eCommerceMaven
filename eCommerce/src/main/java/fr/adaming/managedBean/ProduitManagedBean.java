@@ -170,7 +170,7 @@ public class ProduitManagedBean implements Serializable{
 		}
 		
 		public String getProduits() {
-//			this.produit.getPhoto;
+		this.produit.setPhoto(file.getContents());
 			
 			this.produit= prService.getProduit(this.produit);
 			
@@ -187,8 +187,7 @@ public class ProduitManagedBean implements Serializable{
 	
 		public String upDateProduit() {
 			this.produit.setPhoto(file.getContents());
-			this.produit.setCategorie(this.categorie);
-			Produit pOut= prService.upDateProduit(this.produit, this.categorie);
+			Produit pOut= prService.upDateProduit(this.produit);
 			if(pOut!=null) {
 				List<Produit> list= prService.getAllProduit(categorie);
 				i=true;
@@ -203,8 +202,8 @@ public class ProduitManagedBean implements Serializable{
 		}
 		
 		public String delateProduit() {
-			this.produit.setPhoto(file.getContents());
-			this.produit.setCategorie(this.categorie);
+			
+		
 		prService.delateProduit(this.produit);
 		if(this.produit!=null) {
 			List<Produit> list= prService.getAllProduit(categorie);
