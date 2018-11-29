@@ -38,7 +38,7 @@ public class CategorieDaoImpl implements ICategorieDao{
 	@Override
 	public Categorie addCategorie(Categorie c) {
 		Session s= sf.getCurrentSession();
-		s.persist(c);
+		s.save(c);
 		return c;
 	}
 

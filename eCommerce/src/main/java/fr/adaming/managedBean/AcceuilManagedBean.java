@@ -1,6 +1,7 @@
 package fr.adaming.managedBean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -87,6 +88,17 @@ public class AcceuilManagedBean implements Serializable {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+	public void setClSer(IClientService clSer) {
+		this.clSer = clSer;
+	}
+
+	public void setCaSer(ICategorieService caSer) {
+		this.caSer = caSer;
+	}
+
+	public void setPrSer(IProduitService prSer) {
+		this.prSer = prSer;
 	}
 
 	public String Entrer() {
