@@ -36,21 +36,21 @@
 			<p:column headerText="operations">
 				
 				<h:commandLink action="#{catMB.deleteCategorie}" rendered="#{sessionScope.verifSession}">
-					<p:graphicImage url="/ressources/images/Trash Can_48px.png"
+					<p:graphicImage url="/resources/images/Trash Can_48px.png"
 						width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{cat.id}"
 						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
 				</h:commandLink>
 				
 				<h:commandLink action="#{catMB.upDateLienCategorie}" rendered="#{sessionScope.verifSession}">
-					<p:graphicImage url="/ressources/images/Edit_48px.png"
+					<p:graphicImage url="/resources/images/Edit_48px.png"
 						width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{cat.id}"
 						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
 				</h:commandLink>
 				
 				<h:commandLink action="#{catMB.getListProduits}">
-					<p:graphicImage url="/ressources/images/Search_48px.png"
+					<p:graphicImage url="/resources/images/Search_48px.png"
 						width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{cat.id}"
 						target="#{catMB.categorie.id}"></f:setPropertyActionListener>

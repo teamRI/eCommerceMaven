@@ -68,7 +68,7 @@ public class ClientDaoImpl implements IClientDao {
 
 		Query query = s.createQuery(req);
 		query.setParameter("pMail", c.getEmail());
-		query.setParameter("pMdp", c.getNom());
+		query.setParameter("pNom", c.getNom());
 
 		return (Client) query.uniqueResult();
 	}

@@ -16,64 +16,67 @@
 	</h:form>
 
 	<h:form id="formTest">
-		
-			<p:dataTable id="test" var="lco" value="#{sessionScope.listlco}" >
+
+		<p:dataTable id="test" var="lco" value="#{sessionScope.listlco}">
 			<f:facet name="header">
-            <p:outputLabel value="commande n°#{sessionScope.client.co.id}"/>
-        </f:facet>
-				<p:column headerText="ID">
-					<h:outputText value="#{lco.id}" />
-				</p:column>
+				<p:outputLabel value="commande n°#{sessionScope.client.co.id}" />
+			</f:facet>
+			<p:column headerText="ID">
+				<h:outputText value="#{lco.id}" />
+			</p:column>
 
-				<p:column headerText="nom">
-					<h:outputText value="#{lco.pr.designation}" />
-				</p:column>
+			<p:column headerText="nom">
+				<h:outputText value="#{lco.pr.designation}" />
+			</p:column>
 
-				<p:column headerText="quantité">
-					<h:outputText value="#{lco.quantiteCo}" />
-				</p:column>
+			<p:column headerText="quantité">
+				<h:outputText value="#{lco.quantiteCo}" />
+			</p:column>
 
-				<p:column headerText="prix">
-					<h:outputText value="#{lco.prixfinal}" />
-				</p:column>
-				<p:column headerText="operations">
-					<h:commandLink action="#{lcoMB.deleteLigneCommande}">
-						<p:graphicImage url="/ressources/images/Trash Can_48px.png"
-							width="30"></p:graphicImage>
-						<f:setPropertyActionListener value="#{lco.id}"
-							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
-					</h:commandLink>
-					<h:commandLink action="#{lcoMB.upDatePlusLigneCommande}">
-						<p:graphicImage url="/ressources/images/plus.jpg"
-							width="30"></p:graphicImage>
-						<f:setPropertyActionListener value="#{lco.id}"
-							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
-					</h:commandLink>
-					<h:commandLink action="#{lcoMB.upDateMoinsLigneCommande}">
-						<p:graphicImage url="/ressources/images/moins.jpg"
-							width="30"></p:graphicImage>
-						<f:setPropertyActionListener value="#{lco.id}"
-							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
-					</h:commandLink>
-				</p:column>
-			</p:dataTable>
-			<p:outputLabel value="#{lcoMB.prixTotal}"/>
+			<p:column headerText="prix">
+				<h:outputText value="#{lco.prixfinal}" />
+			</p:column>
+			<p:column headerText="operations">
+				<h:commandLink action="#{lcoMB.deleteLigneCommande}">
+					<p:graphicImage url="/resources/images/Trash Can_48px.png"
+						width="30"></p:graphicImage>
+					<f:setPropertyActionListener value="#{lco.id}"
+						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
+				</h:commandLink>
+				<h:commandLink action="#{lcoMB.upDatePlusLigneCommande}">
+					<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
+					<f:setPropertyActionListener value="#{lco.id}"
+						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
+				</h:commandLink>
+				<h:commandLink action="#{lcoMB.upDateMoinsLigneCommande}">
+					<p:graphicImage url="/resources/images/moins.jpg" width="30"></p:graphicImage>
+					<f:setPropertyActionListener value="#{lco.id}"
+						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
+				</h:commandLink>
+			</p:column>
+		</p:dataTable>
+		<p:outputLabel value="#{lcoMB.prixTotal}" />
 	</h:form>
 
-	
-	<h:form>
-	<h:commandLink action="#{coMB.validerCommande}">
- <h:graphicImage url="/ressources/images/Java_48px.png" width="40" />
 
- <f:setPropertyActionListener value="#{sessionScope.client.co.id}"
-							target="#{coMB.co.id}">
-							
-		<p:dataExporter type="pdf" target="formTest:test" fileName="Récapitulatif"/>
-		</f:setPropertyActionListener>
- </h:commandLink>
-	
-	<p:commandLink action="#{coMB.deleteCommande}" ><h:graphicImage url="/ressources/images/Trash Can_48px.png" width="40" /><f:setPropertyActionListener value="#{sessionScope.client.co.id}"
-							target="#{coMB.co.id}"></f:setPropertyActionListener></p:commandLink>
+	<h:form>
+		<h:commandLink action="#{coMB.validerCommande}">
+			<h:graphicImage url="/resources/images/Visa_48px.png" width="40"
+				title="valider la commande" />
+			<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
+				target="#{coMB.co.id}">
+
+				<p:dataExporter type="pdf" target="formTest:test"
+					fileName="Récapitulatif" />
+			</f:setPropertyActionListener>
+		</h:commandLink>
+
+		<p:commandLink action="#{coMB.deleteCommande}">
+			<h:graphicImage url="/resources/images/Trash Can_48px.png" width="40"
+				title="annuler la commande" />
+			<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
+				target="#{coMB.co.id}"></f:setPropertyActionListener>
+		</p:commandLink>
 	</h:form>
 </h:body>
 </html>

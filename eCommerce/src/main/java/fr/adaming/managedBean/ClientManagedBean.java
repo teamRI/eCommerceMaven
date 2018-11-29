@@ -89,8 +89,6 @@ public class ClientManagedBean implements Serializable {
 	public String addClient() {
 		Client clOut = clSer.addClient(this.cl);
 		if (clOut != null) {
-			List<Categorie> catliste = caSer.getAllCategorie();
-			maSession.setAttribute("catliste", catliste);
 			return "acceuil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
@@ -102,7 +100,7 @@ public class ClientManagedBean implements Serializable {
 		Client clOut = clSer.upDateClient(cl);
 		if (clOut != null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été modifier!"));
-			return "updateclient";
+			return "acceuil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
 			return "updateclient";
@@ -126,7 +124,7 @@ public class ClientManagedBean implements Serializable {
 		int verif = clSer.deleteClient(cl);
 		if (verif != 0) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été supprimé!"));
-			return "deleteclient";
+			return "acceuil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
 			return "deleteclient";

@@ -59,7 +59,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Query query = s.createQuery(req);
 		query.setParameter("pIdco", co.getId());
 
-		return (List<LigneCommande>) query.uniqueResult();
+		return (List<LigneCommande>) query.list();
 	}
 
 	@Override

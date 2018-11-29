@@ -12,9 +12,10 @@
 		<ui:insert name="monLayout">
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
+	</h:form>
 		<h1 style="color: blue; text-align: center;">Categorie</h1>
 		<h:form>
-			<p:dataTable var="cat" value="#{catMB.categorie}">
+			<p:dataTable var="cat" value="#{sessionScope.categorie}">
 				<p:column headerText="ID">
 					<h:outputText value="#{cat.id}" />
 				</p:column>
@@ -35,7 +36,7 @@
 			</p:dataTable>
 		</h:form>
 		<h:form id="form">
-			<p:dataGrid var="pr" value="#{catMB.listProduit}" columns="3"
+			<p:dataGrid var="pr" value="#{sessionScope.prodliste}" columns="3"
 				layout="grid" rows="12" paginator="true" id="prod"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="6,12,16">
@@ -47,21 +48,30 @@
 						<p:graphicImage value="#{pr.image}" />
 
 						<h:outputText value="#{pr.id}" />
+
 						<h:outputText value="#{pr.description}" />
 
 						<h:outputText value="#{pr.prix}" />
 
 						<h:outputText value="#{pr.quantite}" />
-						<h:commandLink action="#{lcoMB.addLigneCommande}">
-							<p:graphicImage url="/ressources/images/plus.jpg" width="30"></p:graphicImage>
-							<f:setPropertyActionListener value="#{pr.id}"
-								target="#{lcoMB.lco.pr.id}"></f:setPropertyActionListener>
-						</h:commandLink>
+
+						<p:commandButton value="ajouter"
+							action="#{lcoMB.addLigneCommande}" ajax="false">
+							<f:setPropertyActionListener value="#{pr}"
+								target="#{lcoMB.lco.pr}"></f:setPropertyActionListener>
+						</p:commandButton>
+						
+						<p:commandButton value="faire mes courses" action="#{lcoMB.test}" ajax="false"/>
+						
+						<p:commandButton value="Ajouter" actionListener="#{lcoMB.test()}" />
+						
+						<h:commandLink action="#{lcoMB.test}">
+							<p:graphicImage url="/resources/images/moins.jpg" width="30"></p:graphicImage>
+						</h:commandLink>				
+				
 					</h:panelGrid>
 				</p:panel>
-
 			</p:dataGrid>
 		</h:form>
-	</h:form>
 </h:body>
 </html>

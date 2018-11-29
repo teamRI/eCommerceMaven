@@ -10,9 +10,9 @@
 <h:body style="background-color: lightblue">
 	<h:form>
 		<h:panelGrid columns="3">
-			<p:commandButton value="faire mes courses" action="#{acMB.Entrer}" />
-			<p:commandButton value="m'authentifier" action="/loginCl" />
-			<p:commandButton value="m'inscrire" action="/addclient" />
+			<p:commandButton value="faire mes courses" action="#{acMB.Entrer}" ajax="false"/>
+			<p:commandButton value="m'authentifier" action="/loginCl" ajax="false"/>
+			<p:commandButton value="m'inscrire" action="/addclient" ajax="false"/>
 		</h:panelGrid>
 	</h:form>
 	<h1 style="text-align: center; color: red">

@@ -117,7 +117,30 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.prixTotal = prixTotal;
 	}
 
+	public void setCoSer(ICommandeService coSer) {
+		this.coSer = coSer;
+	}
+
+	public void setCaSer(ICategorieService caSer) {
+		this.caSer = caSer;
+	}
+
+	public void setPrSer(IProduitService prSer) {
+		this.prSer = prSer;
+	}
+
+	public void setLcoSer(ILigneCommandeService lcoSer) {
+		this.lcoSer = lcoSer;
+	}
+	
+	public String test() {
+		System.out.println("je suis dans la methode d'edwin");
+		return "ok";
+	}
+
 	public String addLigneCommande() {
+		System.out.println("je suis dans la methode");
+		System.out.println(this.cl.getId());
 		this.cl = (Client) maSession.getAttribute("client");
 		this.co.setCl(this.cl);
 		if (cl.getCo() != null) {
@@ -221,7 +244,7 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	public String getAllLigneComandeByCo() {
 		this.cl = (Client) maSession.getAttribute("client");
-		try {
+		if(this.cl!=null) {
 			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
 			maSession.setAttribute("listlco", this.listelco);
 			for (LigneCommande lco : this.listelco) {
@@ -229,10 +252,10 @@ public class LigneCommandeManagedBean implements Serializable {
 			}
 			i = true;
 			return "pannier";
-		} catch (Exception e) {
-
+		} else {
+			return "loginCl";
 		}
-		return "loginCl";
+		
 	}
 
 }

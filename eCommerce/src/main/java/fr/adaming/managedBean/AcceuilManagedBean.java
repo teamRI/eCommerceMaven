@@ -1,7 +1,6 @@
 package fr.adaming.managedBean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -116,6 +115,7 @@ public class AcceuilManagedBean implements Serializable {
 	public String login() {
 		Client clOut = clSer.isExist(this.cl);
 		this.cl = clOut;
+		System.out.println(this.cl.getId());
 		if (clOut != null) {
 			maSession.setAttribute("client", this.cl);
 			catliste = caSer.getAllCategorie();

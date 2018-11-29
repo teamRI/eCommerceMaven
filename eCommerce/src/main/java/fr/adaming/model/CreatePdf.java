@@ -1,12 +1,10 @@
 package fr.adaming.model;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Header;
@@ -14,11 +12,8 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.codec.Base64.OutputStream;
-
-import jdk.net.NetworkPermission;
 
 public class CreatePdf {
 

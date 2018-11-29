@@ -27,7 +27,7 @@ public class Client {
 	private String email;
 	private String tel;
 	
-	@OneToOne(mappedBy="cl",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(mappedBy="cl")
 	private Commande Co;
 	
 	//2*************CONSTRUCTEURS***************************************************************
