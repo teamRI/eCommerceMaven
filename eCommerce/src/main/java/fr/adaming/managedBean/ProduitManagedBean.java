@@ -228,8 +228,9 @@ public class ProduitManagedBean implements Serializable{
 		}
 		
 		public String getProduitByNom() {
-			this.produit=prService.getProduitByNom(produit);
-			if(this.produit!=null) {
+			this.listProduit=prService.getProduitByNom(produit);
+			if(this.listProduit!=null) {
+				adminSession.setAttribute("prodliste", this.listProduit);
 				return "produit";
 			}
 			return "acceuil";

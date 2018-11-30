@@ -22,9 +22,6 @@ public class ProduitServiceImpl implements IProduitService{
 		this.prDao = prDao;
 		
 	}
-	
-	
-	
 
 	@Override
 	public List<Produit> getAllProduit(Categorie c) {
@@ -57,9 +54,9 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public Produit getProduitByNom(Produit pr) {
+	public List<Produit> getProduitByNom(Produit pr) {
 		
-		return null;
+		return prDao.getProduitByNom(pr);
 	}
 
 	

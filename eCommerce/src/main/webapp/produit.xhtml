@@ -13,32 +13,52 @@
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-	<h:form>
-		<p:dataTable var="pr" value="#{prMB.produit}">
-			<p:column headerText="ID">
-				<h:outputText value="#{pr.id}" />
-			</p:column>
+	<h:form id="form">
+		<p:dataGrid var="pr" value="#{sessionScope.prodliste}" columns="3"
+			layout="grid" rows="12" paginator="true" id="prod"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,16">
 
-			<p:column headerText="designation">
-				<h:outputText value="#{pr.designation}" />
-			</p:column>
+			<f:facet name="header">Produit Trouvé</f:facet>
 
-			<p:column headerText="Image">
-				<h:graphicImage value="#{pr.image}" style="width:100px;height:100px" />
-			</p:column>
+			<p:panel header="#{pr.designation}" style="text-align:center">
+				
+				<h:panelGrid columns="1" style="width:100%">
+					
+					<h:commandLink action="#{prMB.getProduits}">
+					<h:graphicImage value="#{pr.image}" style="width:100px;height:100px"/>
+                      <f:setPropertyActionListener value="#{pr.id}"
+						target="#{prMB.produit.id}"></f:setPropertyActionListener>
+				</h:commandLink>
 
-			<p:column headerText="description">
-				<h:outputText value="#{pr.description}" />
-			</p:column>
 
-			<p:column headerText="prix">
-				<h:outputText value="#{pr.prix}" />
-			</p:column>
+					<h:outputText value="#{pr.description}" />
 
-			<p:column headerText="quantité">
-				<h:outputText value="#{pr.quantite}" />
-			</p:column>
-		</p:dataTable>
+					<h:outputText value="#{pr.prix}" >€</h:outputText>
+
+					<h:outputText value="#{pr.quantite}" >en stock</h:outputText>
+
+					<h:commandLink action="#{lcoMB.addLigneCommande}">
+						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
+						<f:setPropertyActionListener value="#{pr.id}"
+							target="#{lcoMB.pr.id}"></f:setPropertyActionListener>
+					</h:commandLink>
+						<h:commandLink action="#{prMB.delateProduit}" rendered="#{sessionScope.verifSession}">
+					<p:graphicImage url="/resources/images/Trash Can_48px.png"
+						width="30"></p:graphicImage>
+					<f:setPropertyActionListener value="#{pr.id}"
+						target="#{prMB.produit.id}"></f:setPropertyActionListener>
+				</h:commandLink>
+				
+				<h:commandLink action="#{prMB.upDateLienProduit}" rendered="#{sessionScope.verifSession}">
+					<p:graphicImage url="/resources/images/Edit_48px.png"
+						width="30"></p:graphicImage>
+					<f:setPropertyActionListener value="#{pr.id}"
+						target="#{prMB.produit.id}"></f:setPropertyActionListener>
+				</h:commandLink>
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
 	</h:form>
 </h:body>
 </html>

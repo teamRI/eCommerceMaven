@@ -76,10 +76,11 @@ public class ProduitDaoImpl implements IProduitDao{
 	}
 
 	@Override
-	public Produit getProduitByNom(Produit pr) {
+	public List<Produit> getProduitByNom(Produit pr) {
 		Session s= sf.getCurrentSession();
-		return null;
+		String req="SELECT p FROM Produit as p WHERE p.designation LIKE :pNom";
+		Query query= s.createQuery(req);
+		query.setParameter("pNom", "%"+pr.getDesignation()+"%");
+		return query.list();
 	}
-
-	
 }
