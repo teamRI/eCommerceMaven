@@ -108,7 +108,7 @@ public class CommandeManagedBean implements Serializable {
 			i = true;
 			return "acceuil";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("l'ajout de la commande a échoué!"));
 			return "addcommande";
 		}
 	}
@@ -121,10 +121,12 @@ public class CommandeManagedBean implements Serializable {
 		}
 		int verif = coSer.deleteCommande(this.co);
 		if (verif != 0) {
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("la commande à bien été supprimer!"));
 			i = true;
 			return "acceuil";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la suppression de la commande a échoué!"));
 			return "pannier";
 		}
 	}
@@ -136,7 +138,7 @@ public class CommandeManagedBean implements Serializable {
 			i = true;
 			return "acceuil";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la modification a échoué!"));
 			return "updatecommande";
 		}
 	}
@@ -148,7 +150,7 @@ public class CommandeManagedBean implements Serializable {
 			i = true;
 			return "getcommande";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la recherche a échoué!"));
 			return "getcommande";
 		}
 	}
@@ -159,7 +161,7 @@ public class CommandeManagedBean implements Serializable {
 			i = true;
 			return "getallcommande";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la recherche a échoué!"));
 			return "getallcommande";
 		}
 
@@ -185,10 +187,12 @@ public class CommandeManagedBean implements Serializable {
 				e.printStackTrace();
 			}
 			envoyermail.sendMail(co.getCl(), co, listlco);
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("la commande à bien été valider, vous avez recus un mail de confirmation!"));
 			i = true;
 			return "acceuil";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la validation a échoué!"));
 			return "pannier";
 		}
 	}

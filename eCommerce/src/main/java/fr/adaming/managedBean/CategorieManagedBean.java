@@ -197,12 +197,13 @@ public class CategorieManagedBean implements Serializable{
 		if(c.getId()!=0) {
 			i=true;
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe", caService.getAllCategorie());
-		
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("la catégorie a bien été ajouté!"));
 		return "acceuil";
 		
 			
 		}else {
-FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'est pas fait"));
+FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("L'ajout n'est pas fait"));
 			i=false;
 			return "addcategorie";
 		}
@@ -217,7 +218,7 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 		}else {
 			
 			i=false;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La categorie n'existe pas"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("La categorie n'existe pas"));
 			return "getcategorie";
 		}
 	}
@@ -235,13 +236,15 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 		Categorie cOut= caService.upDateCategorie(this.categorie);
 		if(cOut!=null) {
 			List<Categorie> list= caService.getAllCategorie();
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("la modification à bien été prise en compte!"));
 			i=true;
 			this.listCategorie=list;
 			return "acceuil";
 		}else {
 			
 			i=false;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La Categorie n'est pas modifié"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("La Categorie n'est pas modifié"));
 			return "updatecategorie";
 		}
 	}
@@ -263,10 +266,11 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 		if(this.categorie!=null) {
 			List<Categorie> list= caService.getAllCategorie();
 			this.listCategorie= list;
-			
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("la suppression à bien été prise en compte!"));
 			return "acceuil";
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La categorie n'est pas effacé"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("La categorie n'est pas effacé"));
 			return "deletecategorie";
 		}}
 	}

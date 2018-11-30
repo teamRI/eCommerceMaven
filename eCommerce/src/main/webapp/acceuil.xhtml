@@ -13,8 +13,7 @@
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-
-
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form>
 		<p:dataGrid var="cat" value="#{catMB.listCategorie}" columns="3"
 			layout="grid" rows="12" paginator="true" id="cat"
@@ -25,40 +24,45 @@
 
 			<p:panel header="#{cat.nomCat}" style="text-align:center">
 				<h:panelGrid columns="1" style="width:100%">
-					
-						<h:commandLink action="#{catMB.getListProduits}">
-					<h:graphicImage value="#{cat.image}" style="width:100px;height:100px"/>
-                        <f:setPropertyActionListener value="#{cat.id}"
-						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
-				</h:commandLink>
+
+					<h:commandLink action="#{catMB.getListProduits}">
+						<h:graphicImage value="#{cat.image}"
+							style="width:100px;height:100px" />
+						<f:setPropertyActionListener value="#{cat.id}"
+							target="#{catMB.categorie.id}"></f:setPropertyActionListener>
+					</h:commandLink>
 
 					<h:outputText value="#{cat.description}" />
-<p:commandLink action="#{catMB.deleteCategorie}" rendered="#{sessionScope.verifSession}" ajax="false">
-					<p:graphicImage url="/resources/images/Trash Can_48px.png"
-						width="30"></p:graphicImage>
-						<p:confirm header="Confirmation" message="Êtes-vous sûr de vouloir supprimer la categorie
+					<p:commandLink action="#{catMB.deleteCategorie}"
+						rendered="#{sessionScope.verifSession}" ajax="false" update="growl">
+						<p:graphicImage url="/resources/images/Trash Can_48px.png"
+							width="30"></p:graphicImage>
+						<p:confirm header="Confirmation"
+							message="Êtes-vous sûr de vouloir supprimer la categorie
 						#{cat.nomCat}?"></p:confirm>
-					<f:setPropertyActionListener value="#{cat.id}"
-						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
-				</p:commandLink>
-				
-				<h:commandLink action="#{catMB.upDateLienCategorie}" rendered="#{sessionScope.verifSession}">
-					<p:graphicImage url="/resources/images/Edit_48px.png"
-						width="30"></p:graphicImage>
-					<f:setPropertyActionListener value="#{cat.id}"
-						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
-				</h:commandLink>
-				
-			
+						<f:setPropertyActionListener value="#{cat.id}"
+							target="#{catMB.categorie.id}"></f:setPropertyActionListener>
+					</p:commandLink>
+
+					<h:commandLink action="#{catMB.upDateLienCategorie}"
+						rendered="#{sessionScope.verifSession}">
+						<p:graphicImage url="/resources/images/Edit_48px.png" width="30"></p:graphicImage>
+						<f:setPropertyActionListener value="#{cat.id}"
+							target="#{catMB.categorie.id}"></f:setPropertyActionListener>
+					</h:commandLink>
+
+
 				</h:panelGrid>
 			</p:panel>
 		</p:dataGrid>
 	</h:form>
-<h:form>
- <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-    </p:confirmDialog>    
-</h:form>
+	<h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
+	</h:form>
 </h:body>
 </html>

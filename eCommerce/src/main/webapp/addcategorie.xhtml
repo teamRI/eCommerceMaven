@@ -16,6 +16,7 @@
 	</h:form>
 	
 	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
 			<h:outputLabel>nom</h:outputLabel>
@@ -27,11 +28,9 @@
 			<p:fileUpload id="image" value="#{catMB.file}" mode="simple" skinSimple="true"/>
 			<p:message for="image" display="icon"/>
 		
-			<p:commandButton value="Ajouter" action="#{catMB.addCategorie}" ajax="false"/>
+			<p:commandButton value="Ajouter" action="#{catMB.addCategorie}" ajax="false" update="growl"/>
 		</h:panelGrid>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
+	
 </h:body>
 </html>

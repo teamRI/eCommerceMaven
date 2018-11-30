@@ -14,17 +14,15 @@
 		</ui:insert>
 	</h:form>
 	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel>date</h:outputLabel>
 			<p:calendar value="#{coMB.co.dateCommande}" />
 			<h:outputLabel>Id du client</h:outputLabel>
 			<p:inputText value="#{coMB.cl.id}" />
-			<p:commandButton value="Ajouter" action="#{coMB.addCommande}" />
+			<p:commandButton value="Ajouter" action="#{coMB.addCommande}" update="growl"/>
 		</h:panelGrid>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
 </h:body>
 </html>

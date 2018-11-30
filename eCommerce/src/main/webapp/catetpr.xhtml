@@ -13,7 +13,7 @@
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-	
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form id="form">
 		<p:dataGrid var="pr" value="#{sessionScope.prodliste}" columns="3"
 			layout="grid" rows="12" paginator="true" id="prod"
@@ -23,38 +23,40 @@
 			<f:facet name="header">#{catMB.categorie.nomCat}</f:facet>
 
 			<p:panel header="#{pr.designation}" style="text-align:center">
-				
+
 				<h:panelGrid columns="1" style="width:100%">
-					
+
 					<h:commandLink action="#{prMB.getProduits}">
-					<h:graphicImage value="#{pr.image}" style="width:100px;height:100px"/>
-                      <f:setPropertyActionListener value="#{pr.id}"
-						target="#{prMB.produit.id}"></f:setPropertyActionListener>
-				</h:commandLink>
+						<h:graphicImage value="#{pr.image}"
+							style="width:100px;height:100px" />
+						<f:setPropertyActionListener value="#{pr.id}"
+							target="#{prMB.produit.id}"></f:setPropertyActionListener>
+					</h:commandLink>
 
 
-					<h:outputText value="#{pr.prix}€" ></h:outputText>
+					<h:outputText value="#{pr.prix}€"></h:outputText>
 
-					<h:outputText value="#{pr.quantite} en Stock" ></h:outputText>
+					<h:outputText value="#{pr.quantite} en Stock"></h:outputText>
 
-					<h:commandLink action="#{lcoMB.addLigneCommande}">
+					<h:commandLink action="#{lcoMB.addLigneCommande}" update="growl">
 						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"
 							target="#{lcoMB.pr.id}"></f:setPropertyActionListener>
 					</h:commandLink>
-						<h:commandLink action="#{prMB.delateProduit}" rendered="#{sessionScope.verifSession}">
-					<p:graphicImage url="/resources/images/Trash Can_48px.png"
-						width="30"></p:graphicImage>
-					<f:setPropertyActionListener value="#{pr.id}"
-						target="#{prMB.produit.id}"></f:setPropertyActionListener>
-				</h:commandLink>
-				
-				<h:commandLink action="#{prMB.upDateLienProduit}" rendered="#{sessionScope.verifSession}">
-					<p:graphicImage url="/resources/images/Edit_48px.png"
-						width="30"></p:graphicImage>
-					<f:setPropertyActionListener value="#{pr.id}"
-						target="#{prMB.produit.id}"></f:setPropertyActionListener>
-				</h:commandLink>
+					<h:commandLink action="#{prMB.delateProduit}"
+						rendered="#{sessionScope.verifSession}" update="growl">
+						<p:graphicImage url="/resources/images/Trash Can_48px.png"
+							width="30"></p:graphicImage>
+						<f:setPropertyActionListener value="#{pr.id}"
+							target="#{prMB.produit.id}"></f:setPropertyActionListener>
+					</h:commandLink>
+
+					<h:commandLink action="#{prMB.upDateLienProduit}"
+						rendered="#{sessionScope.verifSession}" update="growl">
+						<p:graphicImage url="/resources/images/Edit_48px.png" width="30"></p:graphicImage>
+						<f:setPropertyActionListener value="#{pr.id}"
+							target="#{prMB.produit.id}"></f:setPropertyActionListener>
+					</h:commandLink>
 				</h:panelGrid>
 			</p:panel>
 		</p:dataGrid>

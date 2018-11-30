@@ -58,7 +58,7 @@ public class AdminManagedBean implements Serializable{
 				return "acceuil";
 				
 			}else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le login ou mot de passe erroné(s)"));
+				FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("Le login ou mot de passe erroné(s)"));
 				return "login";
 			}
 		

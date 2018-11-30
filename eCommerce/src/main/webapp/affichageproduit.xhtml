@@ -9,20 +9,22 @@
 </h:head>
 <h:body>
 
-<h:form>
+	<h:form>
 		<ui:insert name="monLayout">
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-<h:form>
-   <p:fieldset  legend="#{prMB.produit.designation}" style="margin-bottom:20px">
-        <h:panelGrid var="pr" value="#{prMB.produit}" columns="2" cellpadding="5">
-            <h:graphicImage value="#{pr.image}" style="width:250px;height:250px" />
-            <h:outputText
-                value="#{prMB.produit.description}"/>
-        </h:panelGrid>
-    </p:fieldset>
-</h:form>
+
+	<h:form>
+		<p:fieldset legend="#{prMB.produit.designation}"
+			style="margin-bottom:20px">
+			<h:panelGrid var="pr" value="#{prMB.produit}" columns="2"
+				cellpadding="5">
+				<h:graphicImage value="#{pr.image}" style="width:250px;height:250px" />
+				<h:outputText value="#{prMB.produit.description}" />
+			</h:panelGrid>
+		</p:fieldset>
+	</h:form>
 
 </h:body>
 </html>

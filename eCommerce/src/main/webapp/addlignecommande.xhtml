@@ -14,6 +14,7 @@
 		</ui:insert>
 	</h:form>
 	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id de la Commande</h:outputLabel>
@@ -22,11 +23,8 @@
 			<p:inputText value="#{lcoMB.pr.id}" />
 			<h:outputLabel>Quantité</h:outputLabel>
 			<p:inputText value="#{lcoMB.lco.quantiteCo}" />
-			<p:commandButton value="Ajouter" action="#{lcoMB.addLigneCommande}" />
+			<p:commandButton value="Ajouter" action="#{lcoMB.addLigneCommande}" update="growl"/>
 		</h:panelGrid>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
 </h:body>
 </html>

@@ -137,7 +137,7 @@ public class LigneCommandeManagedBean implements Serializable {
 		System.out.println("je suis dans la methode");
 		this.cl = (Client) maSession.getAttribute("client");
 		System.out.println(this.cl.getId());
-		this.co=coSer.getAllCommandeByCl(this.cl);
+		this.co = coSer.getAllCommandeByCl(this.cl);
 		System.out.println(this.co);
 		if (this.co != null) {
 			this.pr = prSer.getProduit(pr);
@@ -146,14 +146,16 @@ public class LigneCommandeManagedBean implements Serializable {
 			this.lco.setQuantiteCo(1);
 			this.lco = lcoSer.addLigneCommande(this.lco);
 			if (lco != null) {
+				FacesContext.getCurrentInstance().addMessage("SUCCESS",
+						new FacesMessage("le produit à bien été ajouter au pannier!"));
 				i = true;
 				return "catetpr";
 			} else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+				FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("l'ajout a échoué!"));
 				return "acceuil";
 			}
 		} else {
-			this.co=new Commande();
+			this.co = new Commande();
 			this.co.setCl(this.cl);
 			Date dateAct = new Date();
 			this.co.setDateCommande(dateAct);
@@ -170,10 +172,12 @@ public class LigneCommandeManagedBean implements Serializable {
 			if (lco != null) {
 				this.cl.setCo(this.co);
 				maSession.setAttribute("client", this.cl);
+				FacesContext.getCurrentInstance().addMessage("SUCCESS",
+						new FacesMessage("le produit à bien été ajouter au pannier!"));
 				i = true;
 				return "catetpr";
 			} else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+				FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("l'ajout a échoué!"));
 				return "acceuil";
 			}
 		}
@@ -182,21 +186,22 @@ public class LigneCommandeManagedBean implements Serializable {
 	public String deleteLigneCommande() {
 		int verif = lcoSer.deleteLigneCommande(this.lco);
 		if (verif != 0) {
-			i = true;
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("la suppression à bien été prise en compte!"));
 			return "pannier";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la suppression a échoué!"));
 			return "pannier";
 		}
 	}
 
 	public String upDatePlusLigneCommande() {
 		this.cl = (Client) maSession.getAttribute("client");
-		this.lco=lcoSer.getLigneCommande(this.lco);
+		this.lco = lcoSer.getLigneCommande(this.lco);
 		int q = this.lco.getQuantiteCo();
-		this.pr=prSer.getProduit(lco.getPr());
-		int qpr=this.pr.getQuantite();
-		if(q+1<=qpr) {
+		this.pr = prSer.getProduit(lco.getPr());
+		int qpr = this.pr.getQuantite();
+		if (q + 1 <= qpr) {
 			this.lco.setQuantiteCo(q + 1);
 			this.lco = lcoSer.upDateLigneCommande(this.lco);
 			System.out.println(q);
@@ -209,38 +214,39 @@ public class LigneCommandeManagedBean implements Serializable {
 				i = true;
 				return "pannier";
 			} else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+				FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("l'ajout a échoué!"));
 				return "pannier";
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("le stock n'est pas suffisant!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("le stock n'est pas suffisant!"));
 			return "pannier";
 		}
 	}
 
 	public String upDateMoinsLigneCommande() {
 		this.cl = (Client) maSession.getAttribute("client");
-		this.lco=lcoSer.getLigneCommande(this.lco);
+		this.lco = lcoSer.getLigneCommande(this.lco);
 		int q = this.lco.getQuantiteCo();
-		this.pr=prSer.getProduit(lco.getPr());
-		if(q-1>=0) {
-		this.lco.setQuantiteCo(q - 1);
-		this.lco = lcoSer.upDateLigneCommande(this.lco);
-		System.out.println(q);
-		if (this.lco != null) {
-			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
-			maSession.setAttribute("listlco", this.listelco);
-			for (LigneCommande lco : this.listelco) {
-				this.prixTotal = this.prixTotal + lco.getPrixfinal();
+		this.pr = prSer.getProduit(lco.getPr());
+		if (q - 1 >= 0) {
+			this.lco.setQuantiteCo(q - 1);
+			this.lco = lcoSer.upDateLigneCommande(this.lco);
+			System.out.println(q);
+			if (this.lco != null) {
+				this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
+				maSession.setAttribute("listlco", this.listelco);
+				for (LigneCommande lco : this.listelco) {
+					this.prixTotal = this.prixTotal + lco.getPrixfinal();
+				}
+				i = true;
+				return "pannier";
+			} else {
+				FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la modification a échoué!"));
+				return "pannier";
 			}
-			i = true;
-			return "pannier";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
-			return "pannier";
-		}
-		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la quantité ne peut pas être inferieur à 0!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE",
+					new FacesMessage("la quantité ne peut pas être inferieur à 0!"));
 			return "pannier";
 		}
 	}
@@ -252,24 +258,33 @@ public class LigneCommandeManagedBean implements Serializable {
 			i = true;
 			return "getlignecommande";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la recherche a échoué!"));
 			return "getlignecommande";
 		}
 	}
 
 	public String getAllLigneComandeByCo() {
 		this.cl = (Client) maSession.getAttribute("client");
-		if (this.cl != null) {
-			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
-			maSession.setAttribute("listlco", this.listelco);
-			for (LigneCommande lco : this.listelco) {
-				this.prixTotal = this.prixTotal + lco.getPrixfinal();
+		try {
+			if (this.cl != null) {
+				this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
+				maSession.setAttribute("listlco", this.listelco);
+				for (LigneCommande lco : this.listelco) {
+					this.prixTotal = this.prixTotal + lco.getPrixfinal();
+				}
+				i = true;
+				return "pannier";
+			} else {
+				FacesContext.getCurrentInstance().addMessage("FAILURE",
+						new FacesMessage("vous devez vous connecter avant d'accéder à votre pannier!"));
+				return "loginCl";
 			}
-			i = true;
-			return "pannier";
-		} else {
-			return "loginCl";
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
+		FacesContext.getCurrentInstance().addMessage("FAILURE",
+				new FacesMessage("vous devez vous connecter avant d'accéder à votre pannier!"));
+		return "loginCl";
 
 	}
 

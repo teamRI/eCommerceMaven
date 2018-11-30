@@ -14,9 +14,7 @@
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form id="formTest">
 
 		<p:dataTable id="test" var="lco" value="#{sessionScope.listlco}">
@@ -38,19 +36,22 @@
 			<p:column headerText="prix">
 				<h:outputText value="#{lco.prixfinal}" />
 			</p:column>
+			
 			<p:column headerText="operations">
-				<h:commandLink action="#{lcoMB.deleteLigneCommande}">
+				<h:commandLink action="#{lcoMB.deleteLigneCommande}" update="growl">
 					<p:graphicImage url="/resources/images/Trash Can_48px.png"
 						width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{lco.id}"
 						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
 				</h:commandLink>
-				<h:commandLink action="#{lcoMB.upDatePlusLigneCommande}">
+				<h:commandLink action="#{lcoMB.upDatePlusLigneCommande}"
+					update="growl">
 					<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{lco.id}"
 						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
 				</h:commandLink>
-				<h:commandLink action="#{lcoMB.upDateMoinsLigneCommande}">
+				<h:commandLink action="#{lcoMB.upDateMoinsLigneCommande}"
+					update="growl">
 					<p:graphicImage url="/resources/images/moins.jpg" width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{lco.id}"
 						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>

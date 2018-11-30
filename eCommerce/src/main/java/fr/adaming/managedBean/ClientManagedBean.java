@@ -89,9 +89,11 @@ public class ClientManagedBean implements Serializable {
 	public String addClient() {
 		Client clOut = clSer.addClient(this.cl);
 		if (clOut != null) {
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("Bienvenue chez nous Mr!"+clOut.getNom()));
 			return "acceuil";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("l'ajout a échoué!"));
 			return "addclient";
 		}
 	}
@@ -99,10 +101,10 @@ public class ClientManagedBean implements Serializable {
 	public String upDateClient() {
 		Client clOut = clSer.upDateClient(cl);
 		if (clOut != null) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été modifier!"));
+			FacesContext.getCurrentInstance().addMessage("SUCCESS", new FacesMessage("Les modification sont enregistré!"));
 			return "acceuil";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la modification a échoué!"));
 			return "updateclient";
 		}
 	}
@@ -115,7 +117,7 @@ public class ClientManagedBean implements Serializable {
 			return "getclient";
 		} else {
 			i = false;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la recherche a échoué!"));
 			return "getclient";
 		}
 	}
@@ -123,10 +125,10 @@ public class ClientManagedBean implements Serializable {
 	public String deleteClient() {
 		int verif = clSer.deleteClient(cl);
 		if (verif != 0) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été supprimé!"));
+			FacesContext.getCurrentInstance().addMessage("SUCCESS", new FacesMessage("Votre compte à bien été supprimer!"));
 			return "acceuil";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la suppression a échoué!"));
 			return "deleteclient";
 		}
 	}

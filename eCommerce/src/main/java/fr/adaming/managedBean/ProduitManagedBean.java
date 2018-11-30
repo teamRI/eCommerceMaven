@@ -162,10 +162,11 @@ public class ProduitManagedBean implements Serializable {
 			i = true;
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prodListe",
 					prService.getAllProduit(categorie));
-
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("le produit a bien été enregistré!"));
 			return "addproduit";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'est pas fait"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("L'ajout a échoué"));
 			i = false;
 			return "addproduit";
 		}
@@ -182,7 +183,7 @@ public class ProduitManagedBean implements Serializable {
 		} else {
 
 			i = false;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'existe pas"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("Le produit n'existe pas"));
 			return "getproduit";
 		}
 	}
@@ -198,13 +199,15 @@ public class ProduitManagedBean implements Serializable {
 		Produit pOut = prService.upDateProduit(this.produit);
 		if (pOut != null) {
 			List<Produit> list = prService.getAllProduit(categorie);
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("le produit a bien été modifié!"));
 			i = true;
 			adminSession.setAttribute("listProd", list);
 			return "updateproduit";
 		} else {
 
 			i = false;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'est pas modifié"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("Le produit n'est pas modifié"));
 			return "updateproduit";
 		}
 	}
@@ -219,13 +222,14 @@ public class ProduitManagedBean implements Serializable {
 		if (this.produit != null) {
 			List<Produit> list = prService.getAllProduit(categorie);
 			adminSession.setAttribute("listProd", list);
-
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("le produit a bien été supprimé!"));
 			return "catetpr";
 
 		} else {
 			// Recuperer le contexte (c'est ici où les messages d'erreur sont stoquées) de
 			// la req
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'est pas effacé"));
+			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("Le produit n'est pas effacé"));
 
 			return "deleteproduit";
 		}
