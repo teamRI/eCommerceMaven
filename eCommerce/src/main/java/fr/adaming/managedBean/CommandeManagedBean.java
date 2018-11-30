@@ -16,8 +16,10 @@ import fr.adaming.model.Commande;
 import fr.adaming.model.CreatePdf;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Mail;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneCommandeService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "coMB")
 @RequestScoped
@@ -27,6 +29,8 @@ public class CommandeManagedBean implements Serializable {
 	private ICommandeService coSer;
 	@ManagedProperty(value = "#{lcoService}")
 	private ILigneCommandeService lcoSer;
+	@ManagedProperty(value = "#{prService}")
+	private IProduitService prSer;
 
 	private static final long serialVersionUID = 1L;
 
@@ -91,6 +95,10 @@ public class CommandeManagedBean implements Serializable {
 
 	public void setLcoSer(ILigneCommandeService lcoSer) {
 		this.lcoSer = lcoSer;
+	}
+
+	public void setPrSer(IProduitService prSer) {
+		this.prSer = prSer;
 	}
 
 	public String addCommande() {
@@ -162,7 +170,9 @@ public class CommandeManagedBean implements Serializable {
 		this.co = cl.getCo();
 		List<LigneCommande> listlco = (List<LigneCommande>) maSession.getAttribute("listlco");
 		for (LigneCommande lco : listlco) {
-
+			Produit prOut= prSer.getProduit(lco.getPr());
+			prOut.setQuantite(prOut.getQuantite()-lco.getQuantiteCo());
+			prSer.upDateProduit(prOut);
 			int verif1 = lcoSer.deleteLigneCommande(lco);
 		}
 		int verif = coSer.deleteCommande(this.co);
