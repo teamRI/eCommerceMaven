@@ -14,22 +14,19 @@
 		</ui:insert>
 	</h:form>
 
-<h1 style="color: blue; text-align: center;">Formulaire de suppression</h1>
+	<h1 style="color: blue; text-align: center;">Formulaire de
+		suppression</h1>
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
-		
-		    <h:outputLabel>Categorie</h:outputLabel>
+
+			<h:outputLabel>Categorie</h:outputLabel>
 			<p:inputText value="#{catMB.categorie.id}" />
-		
-			
-		
-			<p:commandButton value="supprimer" action="#{catMB.deleteCategorie}" ajax="false"/>
+
+			<p:commandButton value="supprimer" action="#{catMB.deleteCategorie}"
+				ajax="false" update="growl" />
 		</h:panelGrid>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
-
 
 </h:body>
 </html>

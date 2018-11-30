@@ -51,6 +51,7 @@ public class ClientManagedBean implements Serializable {
 	public void init() {
 		this.cl = new Client();
 		this.co = new Commande();
+		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 	}
 
@@ -99,10 +100,14 @@ public class ClientManagedBean implements Serializable {
 	}
 
 	public String upDateClient() {
-		Client clOut = clSer.upDateClient(cl);
+		Client clMod=this.cl;
+		this.cl=(Client) maSession.getAttribute("client");
+		Client clOut = clSer.upDateClient(clMod);
 		if (clOut != null) {
+			this.cl=clOut;
+			maSession.setAttribute("client", this.cl);
 			FacesContext.getCurrentInstance().addMessage("SUCCESS", new FacesMessage("Les modification sont enregistré!"));
-			return "acceuil";
+			return "compteCl";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la modification a échoué!"));
 			return "updateclient";
@@ -129,7 +134,7 @@ public class ClientManagedBean implements Serializable {
 			return "acceuil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la suppression a échoué!"));
-			return "deleteclient";
+			return "CompteCl";
 		}
 	}
 }

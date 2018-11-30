@@ -14,20 +14,19 @@
 		</ui:insert>
 	</h:form>
 
-<h1 style="color: blue; text-align: center;">Effacer produit</h1>
+	<h1 style="color: blue; text-align: center;">Effacer produit</h1>
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
-		
-		
-			    <h:outputLabel>Produit</h:outputLabel>
+
+
+			<h:outputLabel>Produit</h:outputLabel>
 			<p:inputText value="#{prMB.produit.id}" />
-		
-			<p:commandButton value="supprimer" action="#{prMB.delateProduit}" ajax="false"/>
+
+			<p:commandButton value="supprimer" action="#{prMB.delateProduit}"
+				ajax="false" update="growl" />
 		</h:panelGrid>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
 
 </h:body>
 </html>

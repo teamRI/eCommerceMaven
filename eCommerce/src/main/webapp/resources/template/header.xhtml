@@ -22,7 +22,12 @@
 
 		<p:commandButton style="position: relative; left:60%"
 			value="Administrateur" action="/login" />
-		<p:commandLink style="position: relative; left:55%; top: 60px"
+
+		<p:commandButton style="position: relative; left:50%; top: 40px"
+			value="Mon Compte" action="/compteCl"
+			rendered="#{sessionScope.icl}" />
+
+		<p:commandLink style="position: relative; left:45%; top: 100px"
 			action="#{lcoMB.getAllLigneComandeByCo}">
 			<p:graphicImage style="width: 50px; heigh: 50px"
 				url="/resources/images/13364.png" />
@@ -38,32 +43,7 @@
 		<p:megaMenu style="position: relative; top:50px; margin-top:20px"
 			orientation="horizontal" rendered="#{sessionScope.verifSession}">
 			<p:submenu label="Administrateur" icon="pi pi-check">
-				<p:column>
-					<p:submenu label="client">
-						<p:menuitem value="ajouter" url="addclient.xhtml" />
-						<p:menuitem value="supprimer" url="deleteclient.xhtml" />
-						<p:menuitem value="modifier" url="updateclient.xhtml" />
-						<p:menuitem value="chercher" url="getclient.xhtml" />
-					</p:submenu>
-				</p:column>
-				<p:column>
-					<p:submenu label="commande">
-						<p:menuitem value="ajouter" url="addcommande.xhtml" />
-						<p:menuitem value="supprimer" url="deletecommande.xhtml" />
-						<p:menuitem value="modifier" url="updatecommande.xhtml" />
-						<p:menuitem value="chercher" url="getcommande.xhtml" />
-						<p:menuitem value="afficher tous" url="getallcommande.xhtml" />
-					</p:submenu>
-				</p:column>
-				<p:column>
-					<p:submenu label="lignecommande">
-						<p:menuitem value="ajouter" url="addlignecommande.xhtml" />
-						<p:menuitem value="supprimer" url="deletelignecommande.xhtml" />
-						<p:menuitem value="modifier" url="updatelignecommande.xhtml" />
-						<p:menuitem value="chercher" url="getlignecommande.xhtml" />
-						<p:menuitem value="afficher tous" url="getalllignecommande.xhtml" />
-					</p:submenu>
-				</p:column>
+
 				<p:column>
 					<p:submenu label="Categorie">
 						<p:menuitem value="ajouter" url="addcategorie.xhtml" />

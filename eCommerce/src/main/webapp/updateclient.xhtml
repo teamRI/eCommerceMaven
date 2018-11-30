@@ -15,24 +15,28 @@
 	</h:form>
 
 	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id</h:outputLabel>
 			<p:inputText value="#{clMB.cl.id}" />
+
 			<h:outputLabel>nom</h:outputLabel>
 			<p:inputText value="#{clMB.cl.nom}" />
+
 			<h:outputLabel>adresse</h:outputLabel>
 			<p:inputText value="#{clMB.cl.adresse}" />
+
 			<h:outputLabel>e-mail</h:outputLabel>
 			<p:inputText value="#{clMB.cl.email}" />
+
 			<h:outputLabel>telephone</h:outputLabel>
 			<p:inputText value="#{clMB.cl.tel}" />
-			<p:commandButton value="modifier" action="#{clMB.upDateClient}" />
+
+			<p:commandButton value="modifier" action="#{clMB.upDateClient}"
+				update="growl" />
 		</h:panelGrid>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
 
 </h:body>
 </html>

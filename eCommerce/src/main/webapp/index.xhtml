@@ -8,11 +8,14 @@
 	<title>Page d'Acceuil</title>
 </h:head>
 <h:body style="background-color: lightblue">
+	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form>
 		<h:panelGrid columns="3">
-			<p:commandButton value="faire mes courses" action="#{acMB.Entrer}" ajax="false"/>
-			<p:commandButton value="m'authentifier" action="/loginCl" ajax="false"/>
-			<p:commandButton value="m'inscrire" action="/addclient" ajax="false"/>
+			<p:commandButton value="faire mes courses" action="#{acMB.Entrer}"
+				ajax="false" update="growl" />
+			<p:commandButton value="m'authentifier" action="/loginCl"
+				ajax="false" />
+			<p:commandButton value="m'inscrire" action="/addclient" ajax="false" />
 		</h:panelGrid>
 	</h:form>
 	<h1 style="text-align: center; color: red">

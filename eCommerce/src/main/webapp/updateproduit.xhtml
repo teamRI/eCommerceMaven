@@ -15,6 +15,7 @@
 	</h:form>
 
 <h1 style="color: blue; text-align: center;">Formulaire de modification</h1>
+<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
 		
@@ -42,12 +43,10 @@
 			<p:inputText value="#{prMB.produit.quantite}" />
 		
 		
-			<p:commandButton value="Modifier" action="#{prMB.upDateProduit}" ajax="false"/>
+			<p:commandButton value="Modifier" action="#{prMB.upDateProduit}" ajax="false" update="growl"/>
 		</h:panelGrid>
 	</h:form>
-	<h1 style="text-align: center; color: red">
-		<h:messages />
-	</h1>
+
 <h:form>
 <p:dataTable var="pr" value="#{sessionScope.listProd}" rendered="#{prMB.i}">
  <p:column headerText="ID">

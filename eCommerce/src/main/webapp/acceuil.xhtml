@@ -14,7 +14,7 @@
 		</ui:insert>
 	</h:form>
 	<p:growl id="growl" showDetail="true" sticky="true" />
-	<h:form>
+	<h:form style="position: relative; top: 100px">
 		<p:dataGrid var="cat" value="#{catMB.listCategorie}" columns="3"
 			layout="grid" rows="12" paginator="true" id="cat"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
