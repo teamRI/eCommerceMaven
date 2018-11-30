@@ -1,6 +1,8 @@
 package fr.adaming.model;
 
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -17,23 +19,26 @@ import com.lowagie.text.pdf.codec.Base64.OutputStream;
 
 public class CreatePdf {
 
-	Commande co;
-	Client cl;
+
 	LigneCommande lc;
 	
-	 public String writePdf(OutputStream outputStream) throws Exception {
-	        Document document = new Document();
-	        PdfWriter.getInstance(document, outputStream);
+	 public void writePdf(Commande co, Client cl, List<LigneCommande> listlc) throws Exception {
+	        
+		 final String chemin= "C:\\Users\\inti0490\\Desktop\\Formation\\Workspace\\GenerationPDF\\Récapitulatif.pdf";
+		 
+		 
+		 Document document = new Document();
+	      
 	         
 	       
 	         
 	    PdfPTable table= new PdfPTable(4); 
 	    PdfPTable tableCo= new PdfPTable(6);
 	    
-	    Header header= new Header("Récapitulatif du client" + cl.getNom(), null);
+	    Header header= new Header("Récapitulatif du client "+cl.getNom(), chemin);
 	    
 	    try {
-	    	PdfWriter.getInstance(document, outputStream);
+	    	PdfWriter.getInstance(document, new FileOutputStream(chemin));
 	    	 document.open();
 	         
 	        document.addTitle("Récapitulatif");
@@ -47,7 +52,7 @@ public class CreatePdf {
 	        document.add(header);
 	        
 	        cell= new PdfPCell(new Phrase("Client"));
-	        cell.setColspan(4);
+	        cell.setColspan(5);
 	        table.addCell(cell);
 	        
 	        cell= new PdfPCell(new Phrase("Id"));
@@ -87,14 +92,19 @@ public class CreatePdf {
 	        document.add(new Paragraph("\n"));
 	        
 	        cell = new PdfPCell(new Phrase("Commande"));
-			cell.setColspan(6);
+			cell.setColspan(5);
 			tableCo.addCell(cell);
 			
-			
-			cell= new PdfPCell(new Phrase("Id"));
+			cell= new PdfPCell(new Phrase("date commande"));
 	        tableCo.addCell(cell);
 	        
-	        cell= new PdfPCell(new Phrase("date commande"));
+			
+			
+			for(LigneCommande lc: listlc) {
+				
+			
+			
+			cell= new PdfPCell(new Phrase("IdC"));
 	        tableCo.addCell(cell);
 	        
 	        cell= new PdfPCell(new Phrase("produit"));
@@ -106,14 +116,19 @@ public class CreatePdf {
 	        cell= new PdfPCell(new Phrase("prix final"));
 	        tableCo.addCell(cell);
 	        
-	        String idC= Long.toString(lc.getId());
-	        cell= new PdfPCell(new Phrase(id));
-	        tableCo.addCell(cell);
-	        
-	        SimpleDateFormat formatDateJour = new SimpleDateFormat("dd/MM/yyyy");
+	      
+	           SimpleDateFormat formatDateJour = new SimpleDateFormat("dd/MM/yyyy");
 			String dateC = formatDateJour.format(lc.getCo().getDateCommande());
 			cell = new PdfPCell(new Phrase(dateC));
 			tableCo.addCell(cell);
+	        
+	        
+	        
+	        String idC= Integer.toString(lc.getId());
+	        cell= new PdfPCell(new Phrase(idC));
+	        tableCo.addCell(cell);
+	        
+	     
 			
 			 cell= new PdfPCell(new Phrase(lc.getPr().getDesignation()));
 		        tableCo.addCell(cell);
@@ -126,7 +141,7 @@ public class CreatePdf {
 		        cell= new PdfPCell(new Phrase(pxf));
 		        tableCo.addCell(cell);
 		        
-		        document.add(tableCo);
+		        document.add(tableCo);}
 		        
 	    } catch (DocumentException de) {
 			de.printStackTrace();
@@ -136,7 +151,7 @@ public class CreatePdf {
 	        
 	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le PDF a bien été généré"));
 
-			return this.writePdf(outputStream);
+		
 
 	  }   }
 	     

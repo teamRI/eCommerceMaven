@@ -14,6 +14,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.context.PrimeFacesContext;
 import org.primefaces.model.UploadedFile;
 
 
@@ -246,6 +247,18 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 	}
 	
 	public String deleteCategorie() {
+		if(this.categorie.getListeProduit()!=null) {
+			
+			
+	  
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur", 
+					 "Vous ne devriez pas supprimer la categorie. Elle a des produits associes."));
+			 
+			 return "acceuil";
+		}else {
+			
+		
+		
 		caService.delateCategorie(this.categorie);
 		if(this.categorie!=null) {
 			List<Categorie> list= caService.getAllCategorie();
@@ -255,7 +268,7 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La categorie n'est pas effacé"));
 			return "deletecategorie";
-		}
+		}}
 	}
 	
 	public String getListProduits() {

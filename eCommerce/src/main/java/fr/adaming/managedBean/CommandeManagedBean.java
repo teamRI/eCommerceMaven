@@ -178,6 +178,12 @@ public class CommandeManagedBean implements Serializable {
 		int verif = coSer.deleteCommande(this.co);
 
 		if (verif != 0) {
+			try {
+				createpdf.writePdf(co, cl, listlco);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			envoyermail.sendMail(co.getCl(), co, listlco);
 			i = true;
 			return "acceuil";

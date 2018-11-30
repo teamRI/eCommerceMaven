@@ -33,12 +33,14 @@
 				</h:commandLink>
 
 					<h:outputText value="#{cat.description}" />
-<h:commandLink action="#{catMB.deleteCategorie}" rendered="#{sessionScope.verifSession}">
+<p:commandLink action="#{catMB.deleteCategorie}" rendered="#{sessionScope.verifSession}" ajax="false">
 					<p:graphicImage url="/resources/images/Trash Can_48px.png"
 						width="30"></p:graphicImage>
+						<p:confirm header="Confirmation" message="Êtes-vous sûr de vouloir supprimer la categorie
+						#{cat.nomCat}?"></p:confirm>
 					<f:setPropertyActionListener value="#{cat.id}"
 						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
-				</h:commandLink>
+				</p:commandLink>
 				
 				<h:commandLink action="#{catMB.upDateLienCategorie}" rendered="#{sessionScope.verifSession}">
 					<p:graphicImage url="/resources/images/Edit_48px.png"
@@ -52,6 +54,11 @@
 			</p:panel>
 		</p:dataGrid>
 	</h:form>
-<h:form id="deleteCat" title="Attention, vous ne pouvez pas effacer cette Categorie. Il y a des produits lies a cette categorie."></h:form>	
+<h:form>
+ <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+    </p:confirmDialog>    
+</h:form>
 </h:body>
 </html>
