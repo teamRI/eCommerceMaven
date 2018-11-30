@@ -25,7 +25,12 @@
 
 			<p:panel header="#{cat.nomCat}" style="text-align:center">
 				<h:panelGrid columns="1" style="width:100%">
+					
+						<h:commandLink action="#{catMB.getListProduits}">
 					<h:graphicImage value="#{cat.image}" style="width:100px;height:100px"/>
+                        <f:setPropertyActionListener value="#{cat.id}"
+						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
+				</h:commandLink>
 
 					<h:outputText value="#{cat.description}" />
 <h:commandLink action="#{catMB.deleteCategorie}" rendered="#{sessionScope.verifSession}">
@@ -42,14 +47,7 @@
 						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
 				</h:commandLink>
 				
-				<h:commandLink action="#{catMB.getListProduits}">
-					<p:graphicImage url="/resources/images/Search_48px.png"
-						width="30"></p:graphicImage>
-					<f:setPropertyActionListener value="#{cat.id}"
-						target="#{catMB.categorie.id}"></f:setPropertyActionListener>
-				</h:commandLink>
-
-					
+			
 				</h:panelGrid>
 			</p:panel>
 		</p:dataGrid>

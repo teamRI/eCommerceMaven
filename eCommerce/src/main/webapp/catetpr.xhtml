@@ -13,46 +13,31 @@
 			<ui:include src="/resources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-	<h1 style="color: blue; text-align: center;">Categorie</h1>
-	<h:form>
-		<p:dataTable var="cat" value="#{sessionScope.categorie}">
-			<p:column headerText="ID">
-				<h:outputText value="#{cat.id}" />
-			</p:column>
-
-			<p:column headerText="nom">
-				<h:outputText value="#{cat.nomCat}" />
-			</p:column>
-
-			<p:column headerText="Image">
-				<h:graphicImage value="#{cat.image}"
-					style="width:100px;height:100px" />
-			</p:column>
-
-			<p:column headerText="description">
-				<h:outputText value="#{cat.description}" />
-			</p:column>
-
-		</p:dataTable>
-	</h:form>
+	
 	<h:form id="form">
 		<p:dataGrid var="pr" value="#{sessionScope.prodliste}" columns="3"
 			layout="grid" rows="12" paginator="true" id="prod"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="6,12,16">
 
-			<f:facet name="header">Produits</f:facet>
+			<f:facet name="header">#{catMB.categorie.nomCat}</f:facet>
 
 			<p:panel header="#{pr.designation}" style="text-align:center">
 				
 				<h:panelGrid columns="1" style="width:100%">
+					
+					<h:commandLink action="#{prMB.getProduits}">
 					<h:graphicImage value="#{pr.image}" style="width:100px;height:100px"/>
+                      <f:setPropertyActionListener value="#{pr.id}"
+						target="#{prMB.produit.id}"></f:setPropertyActionListener>
+				</h:commandLink>
+
 
 					<h:outputText value="#{pr.description}" />
 
-					<h:outputText value="#{pr.prix}" />
+					<h:outputText value="#{pr.prix}" >€</h:outputText>
 
-					<h:outputText value="#{pr.quantite}" />
+					<h:outputText value="#{pr.quantite}" >en stock</h:outputText>
 
 					<h:commandLink action="#{lcoMB.addLigneCommande}">
 						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>

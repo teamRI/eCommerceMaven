@@ -176,7 +176,7 @@ public class ProduitManagedBean implements Serializable{
 			
 			if(this.produit!=null) {
 				i=true;
-				return "getproduit";
+				return "affichageproduit";
 			}else {
 				
 				i=false;

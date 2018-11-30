@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Produit en detail</title>
+</h:head>
+<h:body>
+<h:form>
+   <p:fieldset  legend="#{prMB.produit.designation}" style="margin-bottom:20px">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:graphicImage value="#{pr.image}" style="width:500px;height:500px"  />
+            <h:outputText
+                value="#{prMB.produit.description}"/>
+        </h:panelGrid>
+    </p:fieldset>
+</h:form>
+
+
+</h:body>
