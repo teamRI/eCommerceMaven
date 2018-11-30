@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,7 +20,7 @@ public class LigneCommande {
 	@Column(name="id_lco")
 	private int id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="pr_id", referencedColumnName="id_pr")
 	private Produit pr;
 	

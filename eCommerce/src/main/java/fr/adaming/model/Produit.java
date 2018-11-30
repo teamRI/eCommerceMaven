@@ -1,5 +1,7 @@
 package fr.adaming.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -41,8 +43,8 @@ public class Produit {
 	   @JoinColumn(name="cat_id",referencedColumnName="id_cat")
        private Categorie categorie;
 	   
-	   @OneToOne(mappedBy="pr")
-	   private LigneCommande ligneCommande;
+	   @OneToMany(mappedBy="pr")
+	   private List<LigneCommande> lignesCommandes;
 	
 	//2*************CONSTRUCTEURS***************************************************************
 	
@@ -127,10 +129,6 @@ public class Produit {
 		this.quantite = quantite;
 	}
 
-
-	
-
-
 	public byte[] getPhoto() {
 		return photo;
 	}
@@ -158,14 +156,17 @@ public class Produit {
 	}
 
 
-	public LigneCommande getLigneCommande() {
-		return ligneCommande;
+	public List<LigneCommande> getLignesCommandes() {
+		return lignesCommandes;
 	}
 
 
-	public void setLigneCommande(LigneCommande ligneCommande) {
-		this.ligneCommande = ligneCommande;
+	public void setLignesCommandes(List<LigneCommande> lignesCommandes) {
+		this.lignesCommandes = lignesCommandes;
 	}
+
+
+
 
 	
 	
