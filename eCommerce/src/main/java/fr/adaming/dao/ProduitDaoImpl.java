@@ -81,6 +81,11 @@ public class ProduitDaoImpl implements IProduitDao{
 		String req="SELECT p FROM Produit as p WHERE p.designation LIKE :pNom";
 		Query query= s.createQuery(req);
 		query.setParameter("pNom", "%"+pr.getDesignation()+"%");
-		return query.list();
+		List<Produit> listOut=query.list();
+		for(Produit prd: listOut) {
+			prd.setImage("data:image/png);base64," + Base64.encodeBase64String(prd.getPhoto()));
+		}
+		
+		return listOut;
 	}
 }

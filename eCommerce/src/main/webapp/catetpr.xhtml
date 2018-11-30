@@ -33,13 +33,11 @@
 				</h:commandLink>
 
 
-					<h:outputText value="#{pr.description}" />
+					<h:outputText value="#{pr.prix}€" ></h:outputText>
 
-					<h:outputText value="#{pr.prix}" >€</h:outputText>
+					<h:outputText value="#{pr.quantite} en Stock" ></h:outputText>
 
-					<h:outputText value="#{pr.quantite}" >en stock</h:outputText>
-
-					<h:commandLink action="#{lcoMB.addLigneCommande}">
+				<h:form>	<h:commandLink action="#{lcoMB.addLigneCommande}">
 						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"
 							target="#{lcoMB.pr.id}"></f:setPropertyActionListener>
@@ -56,7 +54,7 @@
 						width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{pr.id}"
 						target="#{prMB.produit.id}"></f:setPropertyActionListener>
-				</h:commandLink>
+				</h:commandLink></h:form>
 				</h:panelGrid>
 			</p:panel>
 		</p:dataGrid>
