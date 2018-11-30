@@ -205,6 +205,10 @@ public class ProduitManagedBean implements Serializable{
 			}
 		}
 		
+		public String upDateLienProduit() {
+			return "updateproduit";
+		}
+		
 		public String delateProduit() {
 			
 		

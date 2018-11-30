@@ -9,7 +9,9 @@
 	<title>header</title>
 </h:head>
 <h:body>
+
 	<ui:composition>
+	<div><p:commandLink action="/acceuil"><h:graphicImage url="resources/images/Home_48px.png"/>Acceuil</p:commandLink></div>
 		<p:inputText style="position: relative; left:30%" value="#{prMB.produit.designation}"></p:inputText>
 		<p:commandButton style="position: relative; left:30%" value="search"
 			action="#{prMB.getProduitByNom}" />

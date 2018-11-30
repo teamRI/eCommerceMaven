@@ -55,11 +55,24 @@
 
 					<h:outputText value="#{pr.quantite}" />
 
-					<h:commandLink action="#{lcoMB.addLigneCommande}">
+					<h:commandLink action="#{lcoMB.addLigneCommande}" rendered="#{sessionScope.maSession}">
 						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"
 							target="#{lcoMB.pr.id}"></f:setPropertyActionListener>
 					</h:commandLink>
+						<h:commandLink action="#{prMB.delateProduit}" rendered="#{sessionScope.verifSession}">
+					<p:graphicImage url="/resources/images/Trash Can_48px.png"
+						width="30"></p:graphicImage>
+					<f:setPropertyActionListener value="#{pr.id}"
+						target="#{prMB.produit.id}"></f:setPropertyActionListener>
+				</h:commandLink>
+				
+				<h:commandLink action="#{prMB.upDateLienProduit}" rendered="#{sessionScope.verifSession}">
+					<p:graphicImage url="/resources/images/Edit_48px.png"
+						width="30"></p:graphicImage>
+					<f:setPropertyActionListener value="#{pr.id}"
+						target="#{prMB.produit.id}"></f:setPropertyActionListener>
+				</h:commandLink>
 				</h:panelGrid>
 			</p:panel>
 		</p:dataGrid>
