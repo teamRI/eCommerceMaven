@@ -11,28 +11,30 @@
 <h:body>
 
 	<ui:composition>
-		<div>
-			<p:commandLink action="/acceuil">
-				<h:graphicImage url="resources/images/Home_48px.png" title="Acceuil" />
-			</p:commandLink>
-		</div>
+		<p:commandLink action="/acceuil">
+			<h:graphicImage url="resources/images/Home_48px.png" title="Acceuil" />
+		</p:commandLink>
+
 		<p:inputText style="position: relative; left:30%"
 			value="#{prMB.produit.designation}"></p:inputText>
 		<p:commandButton style="position: relative; left:30%" value="search"
 			action="#{prMB.getProduitByNom}" />
-			
-		<h:outputLabel for="prixMax" value="prix Max: " />
-		<p:spinner id="prixMax" value="#{prMB.produit.prix}" prefix="€"
-			min="0" />
-		<p:commandButton value="search" action="#{prMB.getProduitByPrix}" />
-		
-		<p:commandButton style="position: relative; left:65%"
+
+		<p:commandButton style="position: relative; left:60%"
 			value="Administrateur" action="/login" />
-		<p:commandLink style="position: relative; left:60%; top: 60px"
+		<p:commandLink style="position: relative; left:55%; top: 60px"
 			action="#{lcoMB.getAllLigneComandeByCo}">
 			<p:graphicImage style="width: 50px; heigh: 50px"
 				url="/resources/images/13364.png" />
 		</p:commandLink>
+		<br />
+		<br />
+		<br />
+		<h:outputLabel for="prixMax" value="prix Max: " />
+		<p:spinner id="prixMax" value="#{prMB.produit.prix}" prefix="€"
+			min="0" />
+		<p:commandButton value="search" action="#{prMB.getProduitByPrix}" />
+
 		<p:megaMenu style="position: relative; top:50px; margin-top:20px"
 			orientation="horizontal" rendered="#{sessionScope.verifSession}">
 			<p:submenu label="Administrateur" icon="pi pi-check">
