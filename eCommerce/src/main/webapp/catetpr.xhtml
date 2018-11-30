@@ -44,10 +44,9 @@
 			<f:facet name="header">Produits</f:facet>
 
 			<p:panel header="#{pr.designation}" style="text-align:center">
+				
 				<h:panelGrid columns="1" style="width:100%">
-					<p:graphicImage value="#{pr.image}" />
-
-					<h:outputText value="#{pr.id}" />
+					<h:graphicImage value="#{pr.image}" style="width:100px;height:100px"/>
 
 					<h:outputText value="#{pr.description}" />
 
@@ -55,7 +54,7 @@
 
 					<h:outputText value="#{pr.quantite}" />
 
-					<h:commandLink action="#{lcoMB.addLigneCommande}" rendered="#{sessionScope.maSession}">
+					<h:commandLink action="#{lcoMB.addLigneCommande}">
 						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"
 							target="#{lcoMB.pr.id}"></f:setPropertyActionListener>
