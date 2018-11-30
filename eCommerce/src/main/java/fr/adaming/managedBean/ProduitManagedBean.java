@@ -186,7 +186,7 @@ public class ProduitManagedBean implements Serializable{
 		}
 	
 		public String upDateProduit() {
-			if(file!=null) {
+			if(file.getSize()<0) {
 			this.produit.setPhoto(file.getContents());}else {
 				this.categorie.setPhoto(prService.getProduit(produit).getPhoto());;
 			}
@@ -217,7 +217,7 @@ public class ProduitManagedBean implements Serializable{
 			List<Produit> list= prService.getAllProduit(categorie);
 			adminSession.setAttribute("listProd", list);
 			
-			return "deleteproduit";
+			return "catetpr";
 			
 		}else{
 			//Recuperer le contexte (c'est ici où les messages d'erreur sont stoquées) de la req 

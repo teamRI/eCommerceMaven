@@ -226,7 +226,7 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 	}
 	
 	public String upDateCategorie() {
-		if(file!=null) {
+		if(file.getSize()<0) {
 			this.categorie.setPhoto(file.getContents());
 			
 		}else {
