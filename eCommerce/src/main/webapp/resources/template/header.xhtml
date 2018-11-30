@@ -11,10 +11,21 @@
 <h:body>
 
 	<ui:composition>
-	<div><p:commandLink action="/acceuil"><h:graphicImage url="resources/images/Home_48px.png"/>Acceuil</p:commandLink></div>
-		<p:inputText style="position: relative; left:30%" value="#{prMB.produit.designation}"></p:inputText>
+		<div>
+			<p:commandLink action="/acceuil">
+				<h:graphicImage url="resources/images/Home_48px.png" title="Acceuil" />
+			</p:commandLink>
+		</div>
+		<p:inputText style="position: relative; left:30%"
+			value="#{prMB.produit.designation}"></p:inputText>
 		<p:commandButton style="position: relative; left:30%" value="search"
 			action="#{prMB.getProduitByNom}" />
+			
+		<h:outputLabel for="prixMax" value="prix Max: " />
+		<p:spinner id="prixMax" value="#{prMB.produit.prix}" prefix="€"
+			min="0" />
+		<p:commandButton value="search" action="#{prMB.getProduitByPrix}" />
+		
 		<p:commandButton style="position: relative; left:65%"
 			value="Administrateur" action="/login" />
 		<p:commandLink style="position: relative; left:60%; top: 60px"

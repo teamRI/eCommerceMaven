@@ -59,5 +59,11 @@ public class ProduitServiceImpl implements IProduitService{
 		return prDao.getProduitByNom(pr);
 	}
 
+	@Override
+	public List<Produit> getProduitByPrix(Produit pr) {
+		
+		return prDao.getProduitByPrix(pr);
+	}
+
 	
 }

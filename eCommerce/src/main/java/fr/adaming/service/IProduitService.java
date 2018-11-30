@@ -19,5 +19,7 @@ public interface IProduitService {
 		public int delateProduit(Produit pr);
 		
 		public List<Produit> getProduitByNom(Produit pr);
+		
+		public List<Produit> getProduitByPrix(Produit pr);
 
 }

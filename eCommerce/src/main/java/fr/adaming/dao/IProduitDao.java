@@ -22,5 +22,7 @@ public interface IProduitDao {
 	
 	public List<Produit> getProduitByNom(Produit pr);
 	
+	public List<Produit> getProduitByPrix(Produit pr);
+	
 	
 }

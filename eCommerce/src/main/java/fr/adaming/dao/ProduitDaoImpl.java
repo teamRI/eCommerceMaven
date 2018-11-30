@@ -88,4 +88,18 @@ public class ProduitDaoImpl implements IProduitDao{
 		
 		return listOut;
 	}
+
+	@Override
+	public List<Produit> getProduitByPrix(Produit pr) {
+		Session s= sf.getCurrentSession();
+		String req="SELECT p FROM Produit as p WHERE p.prix < :pPrix";
+		Query query= s.createQuery(req);
+		query.setParameter("pPrix", pr.getPrix());
+		List<Produit> listOut=query.list();
+		for(Produit prd: listOut) {
+			prd.setImage("data:image/png);base64," + Base64.encodeBase64String(prd.getPhoto()));
+		}
+		
+		return listOut;
+	}
 }
