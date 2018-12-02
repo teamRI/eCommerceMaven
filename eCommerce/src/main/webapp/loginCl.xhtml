@@ -11,7 +11,8 @@
 	<p:growl id="growl" showDetail="true" sticky="true" />
 	<h:form>
 		<h:panelGrid columns="2">
-			email :<h:inputText value="#{acMB.cl.email}" />
+			email :<h:inputText value="#{acMB.cl.email}"  required="true"
+			disabled="#{acMB.cl.email}" validator="#{clMB.validateModelMail}"/>
 			
 			nom : <h:inputSecret value="#{acMB.cl.nom}" />
 

@@ -8,7 +8,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Categorie;
@@ -18,7 +21,6 @@ import fr.adaming.model.LigneCommande;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
 
-
 @ManagedBean(name = "clMB")
 @RequestScoped
 public class ClientManagedBean implements Serializable {
@@ -26,9 +28,9 @@ public class ClientManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{clService}")
 	private IClientService clSer;
-	@ManagedProperty(value="#{caService}")
+	@ManagedProperty(value = "#{caService}")
 	private ICategorieService caSer;
-	
+
 	public void setClSer(IClientService clSer) {
 		this.clSer = clSer;
 	}
@@ -51,7 +53,7 @@ public class ClientManagedBean implements Serializable {
 	public void init() {
 		this.cl = new Client();
 		this.co = new Commande();
-		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 	}
 
@@ -91,7 +93,7 @@ public class ClientManagedBean implements Serializable {
 		Client clOut = clSer.addClient(this.cl);
 		if (clOut != null) {
 			FacesContext.getCurrentInstance().addMessage("SUCCESS",
-					new FacesMessage("Bienvenue chez nous Mr!"+clOut.getNom()));
+					new FacesMessage("Bienvenue chez nous Mr!" + clOut.getNom()));
 			return "acceuil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("l'ajout a échoué!"));
@@ -100,13 +102,14 @@ public class ClientManagedBean implements Serializable {
 	}
 
 	public String upDateClient() {
-		Client clMod=this.cl;
-		this.cl=(Client) maSession.getAttribute("client");
+		Client clMod = this.cl;
+		this.cl = (Client) maSession.getAttribute("client");
 		Client clOut = clSer.upDateClient(clMod);
 		if (clOut != null) {
-			this.cl=clOut;
+			this.cl = clOut;
 			maSession.setAttribute("client", this.cl);
-			FacesContext.getCurrentInstance().addMessage("SUCCESS", new FacesMessage("Les modification sont enregistré!"));
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("Les modification sont enregistré!"));
 			return "compteCl";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la modification a échoué!"));
@@ -130,11 +133,37 @@ public class ClientManagedBean implements Serializable {
 	public String deleteClient() {
 		int verif = clSer.deleteClient(cl);
 		if (verif != 0) {
-			FacesContext.getCurrentInstance().addMessage("SUCCESS", new FacesMessage("Votre compte à bien été supprimer!"));
+			FacesContext.getCurrentInstance().addMessage("SUCCESS",
+					new FacesMessage("Votre compte à bien été supprimer!"));
 			return "acceuil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("la suppression a échoué!"));
 			return "CompteCl";
+		}
+	}
+
+	public void validateModelNo(FacesContext context, UIComponent comp,
+			Object value) {
+
+		String mno = (String) value;
+		boolean v=mno.contains("a" + "b" + "c" + "d" + "e" + "f" + "g" + "h" + "i" + "j" + "k" + "l" + "m"
+				+ "n" + "o" + "p" + "q" + "r" + "s" + "t" + "u" + "v" + "w" + "x" + "y" + "z" + "," + "." + "?" + ";"
+				+ ":" + "/" + "!" + "-" + " " + "'" + ")" + "(");
+		if (mno.length() < 10 | v == false) {
+			((UIInput) comp).setValid(false);
+
+			throw new ValidatorException(new FacesMessage("Un numéro de telephone doit contenir 10 caractères et seulements des chiffres"));
+		}
+	}
+
+	public void validateModelMail(FacesContext context, UIComponent comp, Object value) {
+
+		String saisie = (String) value;
+		boolean v = saisie.contains("@");
+		if (v == false) {
+			((UIInput) comp).setValid(false);
+			throw new ValidatorException(new FacesMessage("le mail doit contenir '@'"));
+
 		}
 	}
 }

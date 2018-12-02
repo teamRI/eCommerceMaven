@@ -37,7 +37,8 @@
 			<p:message for="image" display="icon"/>
 			
 			<h:outputLabel>prix</h:outputLabel>
-			<p:inputText value="#{prMB.produit.prix}" />
+			<p:spinner id="prixMax" value="#{prMB.produit.prix}" prefix="€"
+			min="0" />
 			
 			<h:outputLabel>quantité</h:outputLabel>
 			<p:inputText value="#{prMB.produit.quantite}" />

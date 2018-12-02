@@ -115,7 +115,7 @@ public class AcceuilManagedBean implements Serializable {
 	public String login() {
 		Client clOut = clSer.isExist(this.cl);
 		this.cl = clOut;
-		System.out.println(this.cl.getId());
+
 		if (clOut != null) {
 			i=true;
 			maSession.setAttribute("icl", this.i);

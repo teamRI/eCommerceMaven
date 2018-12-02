@@ -24,9 +24,19 @@
 			<p:inputText value="#{prMB.produit.id}" />
 
 			<p:commandButton value="supprimer" action="#{prMB.delateProduit}"
-				ajax="false" update="growl" />
+				ajax="false" update="growl">
+				<p:confirm header="Confirmation"
+					message="Êtes-vous sûr de vouloir supprimer ce produit?"></p:confirm>
+			</p:commandButton>
 		</h:panelGrid>
 	</h:form>
-
+	<h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
+	</h:form>
 </h:body>
 </html>

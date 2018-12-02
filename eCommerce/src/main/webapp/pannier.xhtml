@@ -36,22 +36,23 @@
 			<p:column headerText="prix">
 				<h:outputText value="#{lco.prixfinal}" />
 			</p:column>
-			
+
 			<p:column headerText="operations">
-				<h:commandLink action="#{lcoMB.deleteLigneCommande}" update="growl">
+				<h:commandLink action="#{lcoMB.deleteLigneCommande}" update="growl"
+					title="suprimer">
 					<p:graphicImage url="/resources/images/Trash Can_48px.png"
 						width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{lco.id}"
 						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
 				</h:commandLink>
 				<h:commandLink action="#{lcoMB.upDatePlusLigneCommande}"
-					update="growl">
+					update="growl" title="augmenter la quantité">
 					<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{lco.id}"
 						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
 				</h:commandLink>
 				<h:commandLink action="#{lcoMB.upDateMoinsLigneCommande}"
-					update="growl">
+					update="growl" title="diminuer la quantité">
 					<p:graphicImage url="/resources/images/moins.jpg" width="30"></p:graphicImage>
 					<f:setPropertyActionListener value="#{lco.id}"
 						target="#{lcoMB.lco.id}"></f:setPropertyActionListener>

@@ -27,7 +27,7 @@
 
 				<h:panelGrid columns="1" style="width:100%">
 
-					<h:commandLink action="#{prMB.getProduits}" update="growl">
+					<h:commandLink action="#{prMB.getProduits}" update="growl" title="afficher détail">
 						<h:graphicImage value="#{pr.image}"
 							style="width:100px;height:100px" />
 						<f:setPropertyActionListener value="#{pr.id}"
@@ -41,12 +41,12 @@
 
 					<h:outputText value="#{pr.quantite}">en stock</h:outputText>
 
-					<h:commandLink action="#{lcoMB.addLigneCommande}" update="growl">
+					<h:commandLink action="#{lcoMB.addLigneCommande}" update="growl" title="ajouter au pannier">
 						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"
 							target="#{lcoMB.pr.id}"></f:setPropertyActionListener>
 					</h:commandLink>
-					<h:commandLink action="#{prMB.delateProduit}"
+					<h:commandLink action="#{prMB.delateProduit}" title="supprimer"
 						rendered="#{sessionScope.verifSession}" update="growl">
 						<p:graphicImage url="/resources/images/Trash Can_48px.png"
 							width="30"></p:graphicImage>
@@ -54,7 +54,7 @@
 							target="#{prMB.produit.id}"></f:setPropertyActionListener>
 					</h:commandLink>
 
-					<h:commandLink action="#{prMB.upDateLienProduit}"
+					<h:commandLink action="#{prMB.upDateLienProduit}" title="modifier"
 						rendered="#{sessionScope.verifSession}" update="growl">
 						<p:graphicImage url="/resources/images/Edit_48px.png" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"

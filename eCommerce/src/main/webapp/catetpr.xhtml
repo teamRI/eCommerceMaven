@@ -38,20 +38,22 @@
 
 					<h:outputText value="#{pr.quantite} en Stock"></h:outputText>
 
-					<h:commandLink action="#{lcoMB.addLigneCommande}" update="growl">
+					<h:commandLink action="#{lcoMB.addLigneCommande}" update="growl" title="ajouter au pannier">
 						<p:graphicImage url="/resources/images/plus.jpg" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"
 							target="#{lcoMB.pr.id}"></f:setPropertyActionListener>
 					</h:commandLink>
-					<h:commandLink action="#{prMB.delateProduit}"
+					<h:commandLink action="#{prMB.delateProduit}" title="supprimer"
 						rendered="#{sessionScope.verifSession}" update="growl">
 						<p:graphicImage url="/resources/images/Trash Can_48px.png"
 							width="30"></p:graphicImage>
+						<p:confirm header="Confirmation"
+							message="Êtes-vous sûr de vouloir supprimer cette ligne de commande?"></p:confirm>
 						<f:setPropertyActionListener value="#{pr.id}"
 							target="#{prMB.produit.id}"></f:setPropertyActionListener>
 					</h:commandLink>
 
-					<h:commandLink action="#{prMB.upDateLienProduit}"
+					<h:commandLink action="#{prMB.upDateLienProduit}" title="modifier"
 						rendered="#{sessionScope.verifSession}" update="growl">
 						<p:graphicImage url="/resources/images/Edit_48px.png" width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{pr.id}"
@@ -60,6 +62,14 @@
 				</h:panelGrid>
 			</p:panel>
 		</p:dataGrid>
+	</h:form>
+	<h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
 	</h:form>
 </h:body>
 </html>

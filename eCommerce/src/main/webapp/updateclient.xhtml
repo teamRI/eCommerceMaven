@@ -28,10 +28,12 @@
 			<p:inputText value="#{clMB.cl.adresse}" />
 
 			<h:outputLabel>e-mail</h:outputLabel>
-			<p:inputText value="#{clMB.cl.email}" />
+			<p:inputText value="#{clMB.cl.email}"  required="true"
+			disabled="#{clMB.cl.email}" validator="#{clMB.validateModelMail}" />
 
 			<h:outputLabel>telephone</h:outputLabel>
-			<p:inputText value="#{clMB.cl.tel}" />
+			<p:inputText value="#{clMB.cl.tel}" required="true" size="10"
+			disabled="#{clMB.cl.tel}" validator="#{clMB.validateModelNo}"/>
 
 			<p:commandButton value="modifier" action="#{clMB.upDateClient}"
 				update="growl" />
