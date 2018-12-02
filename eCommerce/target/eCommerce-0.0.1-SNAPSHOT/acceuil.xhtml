@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Page d'Acceuil</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/resources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+	<p:growl id="growl" showDetail="true" sticky="true" />
+	<h:form style="position: relative; top: 100px">
+		<p:dataGrid var="cat" value="#{catMB.listCategorie}" columns="3"
+			layout="grid" rows="12" paginator="true" id="cat"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,16">
+
+			<f:facet name="header">Categories</f:facet>
+
+			<p:panel header="#{cat.nomCat}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+
+					<h:commandLink action="#{catMB.getListProduits}" title="afficher les produits">
+						<h:graphicImage value="#{cat.image}"
+							style="width:100px;height:100px" />
+						<f:setPropertyActionListener value="#{cat.id}"
+							target="#{catMB.categorie.id}"></f:setPropertyActionListener>
+					</h:commandLink>
+
+					<h:outputText value="#{cat.description}" />
+					<p:commandLink action="#{catMB.deleteCategorie}" title="supprimer"
+						rendered="#{sessionScope.verifSession}" ajax="false" update="growl">
+						<p:graphicImage url="/resources/images/Trash Can_48px.png"
+							width="30"></p:graphicImage>
+						<p:confirm header="Confirmation"
+							message="Êtes-vous sûr de vouloir supprimer la categorie
+						#{cat.nomCat}?"></p:confirm>
+						<f:setPropertyActionListener value="#{cat.id}"
+							target="#{catMB.categorie.id}"></f:setPropertyActionListener>
+					</p:commandLink>
+
+					<h:commandLink action="#{catMB.upDateLienCategorie}"
+						rendered="#{sessionScope.verifSession}" title="modifier">
+						<p:graphicImage url="/resources/images/Edit_48px.png" width="30"></p:graphicImage>
+						<f:setPropertyActionListener value="#{cat.id}"
+							target="#{catMB.categorie.id}"></f:setPropertyActionListener>
+					</h:commandLink>
+
+
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
+	</h:form>
+	<h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
+	</h:form>
+</h:body>
+</html>

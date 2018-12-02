@@ -7,9 +7,11 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Header;
+import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
@@ -32,10 +34,10 @@ public class CreatePdf {
 	         
 	       
 	         
-	    PdfPTable table= new PdfPTable(4); 
-	    PdfPTable tableCo= new PdfPTable(6);
+	    PdfPTable table= new PdfPTable(6); 
+	    PdfPTable tableCo= new PdfPTable(5);
 	    
-	    Header header= new Header("Récapitulatif du client "+cl.getNom(), chemin);
+	   
 	    
 	    try {
 	    	PdfWriter.getInstance(document, new FileOutputStream(chemin));
@@ -44,15 +46,22 @@ public class CreatePdf {
 	        document.addTitle("Récapitulatif");
 	        document.addSubject("Récapitulatif commande");
 	        document.addKeywords("iText, email");
-	        document.addAuthor("ECommerce");
-	        document.addCreator("ECommerce");
+	        document.addAuthor("Endor online");
+	        document.addCreator("Endor online");
 	   
+	        
+	        Chunk chunk = new Chunk("Récapitulatif du client "+cl.getNom(), null);
+	      Image image;
+	      image= Image.getInstance("C:\\Users\\inti0490\\Desktop\\eCommerce\\logo1.jpg");
+	      image.setAbsolutePosition(2, 150);
+	      document.add(image);
+	        
 	        PdfPCell cell;
 	        
-	        document.add(header);
+	        document.add(chunk);
 	        
 	        cell= new PdfPCell(new Phrase("Client"));
-	        cell.setColspan(5);
+	        cell.setColspan(6);
 	        table.addCell(cell);
 	        
 	        cell= new PdfPCell(new Phrase("Id"));
@@ -94,6 +103,7 @@ public class CreatePdf {
 	        cell = new PdfPCell(new Phrase("Commande"));
 			cell.setColspan(5);
 			tableCo.addCell(cell);
+			
 			
 			cell= new PdfPCell(new Phrase("date commande"));
 	        tableCo.addCell(cell);

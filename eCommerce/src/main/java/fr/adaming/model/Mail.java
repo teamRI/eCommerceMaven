@@ -64,7 +64,7 @@ public class Mail {
 					message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 					// Set Subject: header field
-					message.setSubject("ECommerce : commande numéro " + co.getId());
+					message.setSubject("Endor online : commande numéro " + co.getId());
 
 					// Create the message part 
 					BodyPart messageBodyPart = new MimeBodyPart(); 
@@ -83,8 +83,9 @@ public class Mail {
 							+ ", \nBonjour,\nNous vous confirmons l'enregistrement de votre commande numéro " + co.getId()
 							+ ".\nRécapitulatif de la commande :" + recap +"\n\nMontant total de la commande :"+prixTotal+"€"
 							+ "\n\nVous trouverez le détail de votre facture en pièce jointe au format pdf.\n\n"
-							+ "En espérant vous revoir bientôt sur notre site, cordialement\n\nToute l'équipe de ECommerce");
+							+ "En espérant vous revoir bientôt sur notre site, cordialement\n\nToute l'équipe de Endor online");
 
+					
 					// Part two is attachment 
 					messageBodyPart = new MimeBodyPart(); 
 					DataSource source = new FileDataSource("C:\\Users\\inti0490\\Desktop\\Formation\\Workspace\\GenerationPDF\\Récapitulatif.pdf"); 

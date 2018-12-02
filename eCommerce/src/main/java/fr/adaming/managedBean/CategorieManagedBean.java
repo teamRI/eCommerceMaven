@@ -228,7 +228,7 @@ FacesContext.getCurrentInstance().addMessage("FAILURE", new FacesMessage("L'ajou
 	}
 	
 	public String upDateCategorie() {
-		if(file.getSize()<0) {
+		if(file!=null) {
 			this.categorie.setPhoto(file.getContents());
 			
 		}else {
