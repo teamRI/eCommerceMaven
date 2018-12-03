@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Compte Client</title>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/resources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+	<p:growl id="growl" showDetail="true" sticky="true" />
+	<h:form>
+		<p:dataTable var="cl" value="#{sessionScope.client}">
+			<p:column headerText="ID">
+				<h:outputText value="#{cl.id}" />
+			</p:column>
+
+			<p:column headerText="Nom">
+				<h:outputText value="#{cl.nom}" />
+			</p:column>
+
+			<p:column headerText="Adresse">
+				<h:outputText value="#{cl.adresse}" />
+			</p:column>
+
+			<p:column headerText="Telephone">
+				<h:outputText value="#{cl.tel}" />
+			</p:column>
+
+			<p:column headerText="E-mail">
+				<h:outputText value="#{cl.email}" />
+			</p:column>
+
+		</p:dataTable>
+		<p:commandButton value="suprimer mon compte"
+			action="#{clMB.deleteClient}" update="growl">
+			<f:setPropertyActionListener value="#{sessionScope.client.id}"
+				target="#{clMB.cl.id}"></f:setPropertyActionListener>
+			<p:confirm header="Confirmation"
+				message="Êtes-vous sûr de vouloir supprimer votre Compte?"></p:confirm>
+		</p:commandButton>
+
+		<p:commandButton value="modifier mon compte" action="/updateclient"
+			ajax="false">
+			<f:setPropertyActionListener value="#{sessionScope.client}"
+				target="#{clMB.cl}"></f:setPropertyActionListener>
+		</p:commandButton>
+	</h:form>
+	<h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
+	</h:form>
+</h:body>
+</html>
